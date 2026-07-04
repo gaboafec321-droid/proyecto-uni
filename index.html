@@ -20,7 +20,7 @@
             color: #333;
         }
 
-        /* Encabezado con el degradado del logo (Verde manzana a Verde/Azul oscuro) */
+        /* Encabezado con el degradado del logo */
         header {
             background: linear-gradient(135deg, #8bc34a 0%, #174461 100%);
             color: white;
@@ -78,7 +78,26 @@
         .subtitulo-seccion {
             text-align: center;
             color: #666;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        /* Barra de búsqueda */
+        .contenedor-busqueda {
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #8bc34a;
+        }
+
+        .contenedor-busqueda input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
         }
 
         /* Grilla de productos */
@@ -97,13 +116,13 @@
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            border: 2px solid #8bc34a; /* Verde manzana del corazón */
+            border: 2px solid #8bc34a;
         }
 
-        /* Al pasar el mouse, el marco toma el tono azul de la personita */
+        /* Al pasar el mouse, el marco toma el tono azul */
         .tarjeta-producto:hover {
             transform: translateY(-8px);
-            border-color: #0081c2; /* Azul de la silueta */
+            border-color: #0081c2;
             box-shadow: 0 8px 20px rgba(0,81,194,0.15);
         }
 
@@ -135,7 +154,7 @@
             flex-grow: 1;
         }
 
-        /* Datos de consulta con el naranja de la cabeza del logo como detalle */
+        /* Datos de consulta con el naranja como detalle */
         .datos-consulta {
             background-color: #f2f7ee;
             padding: 12px;
@@ -145,12 +164,12 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            border-left: 4px solid #f39221; /* Detalle naranja */
+            border-left: 4px solid #f39221;
         }
 
         /* Botón con el azul de la personita del logo */
         .btn-consultar {
-            background-color: #0081c2; /* Azul de la silueta */
+            background-color: #0081c2;
             color: white;
             border: none;
             padding: 12px;
@@ -161,6 +180,7 @@
             transition: background-color 0.2s ease, transform 0.1s ease;
             text-align: center;
             box-shadow: 0 3px 6px rgba(0,129,194,0.2);
+            text-decoration: none;
         }
 
         .btn-consultar:hover {
@@ -168,7 +188,7 @@
             transform: scale(1.02);
         }
 
-        /* Pie de Página en sintonía con el tono oscuro */
+        /* Pie de Página */
         footer {
             background-color: #174461;
             color: #e0e0e0;
@@ -209,23 +229,28 @@
         <h2 class="titulo-seccion">Nuestro Catálogo de Productos</h2>
         <p class="subtitulo-seccion">Explora nuestra oferta disponible para el cuidado de tu salud.</p>
 
-        <!-- Grilla de Productos -->
-        <div class="grilla-productos">
+        <!-- Buscador de productos -->
+        <div class="contenedor-busqueda">
+            <input type="text" id="buscador" placeholder="Buscar producto por nombre..." onkeyup="filtrarProductos()">
+        </div>
 
-            <!-- Producto Nuevo: Prostaplant 500 mg -->
+        <!-- Grilla de Productos -->
+        <div class="grilla-productos" id="grilla">
+
+            <!-- Producto: Prostaplant 500 mg -->
             <div class="tarjeta-producto">
                 <div class="imagen-producto">
                     <img src="prostaplant.jpg" alt="Prostaplant Herbaplant" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Prostaplant 500 mg (Cuidado de la Próstata)</h3>
-                    <p class="descripcion">Suplemento de origen natural formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un efectivo desinflamatorio de la próstata, ayudando a aliviar las molestias asociadas a su agrandamiento y contribuye directamente a disminuir la micción frecuente, permitiendo un mejor descanso y bienestar general.</p>
+                    <p class="descripcion">Suplemento de origen natural formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un efectivo desinflamatorio de la próstata, ayudando a aliviar las molestias asociadas a su agrandamiento y contribuye directamente a disminuir la micción frecuente.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 19$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Prostaplant 500 mg', 'Frasco de 60 Cápsulas', '19$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -236,13 +261,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Muxer 500 mg (Climaterio y Menopausia)</h3>
-                    <p class="descripcion">Suplemento natural especialmente formulado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece un soporte eficaz en la regulación hormonal, contribuyendo al alivio de los trastornos menstruales, los incómodos calorones y la resequedad vaginal, promoviendo el equilibrio y confort en tu día a día.</p>
+                    <p class="descripcion">Suplemento natural especialmente formulado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece un soporte eficaz en la regulación hormonal, contribuyendo al alivio de los trastornos menstruales, los incómodos calorones y la resequedad vaginal.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 16$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Muxer 500 mg', 'Frasco de 60 Cápsulas', '16$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -253,13 +278,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Magnetrol X5 (5 Tipos de Magnesios)</h3>
-                    <p class="descripcion">Fórmula premium avanzada que combina 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato) logrando un 98% de absorción. Favorece el óptimo funcionamiento del sistema nervioso y muscular, a la vez que contribuye activamente a la salud ósea. Participa de manera clave en la regulación de la presión arterial, ayuda notablemente a reducir el estrés cotidiano e impulsa el metabolismo energético para un día lleno de vitalidad.</p>
+                    <p class="descripcion">Fórmula premium avanzada que combina 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato) logrando un 98% de absorción. Favorece el óptimo funcionamiento del sistema nervioso y muscular, reduce el estrés cotidiano e impulsa el metabolismo energético.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas Veganas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 19$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Magnetrol X5', 'Frasco de 60 Cápsulas Veganas', '19$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -270,13 +295,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Sábila (Aloe Vera) 500 mg</h3>
-                    <p class="descripcion">Suplemento natural elaborado a base de extracto puro de Aloe Vera. Es una solución tradicional and efectiva que ayuda a combatir el estreñimiento, actuando como un suave regulador del tránsito intestinal. Además, promueve la desinflamación del sistema digestivo, protege la mucosa gástrica y favorece una digestión mucho más ligera y saludable.</p>
+                    <p class="descripcion">Suplemento natural elaborado a base de extracto puro de Aloe Vera. Es una solución tradicional y efectiva que ayuda a combatir el estreñimiento, actuando como un suave regulador del tránsito intestinal. Además, promueve la desinflamación del sistema digestivo y protege la mucosa gástrica.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 10 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 8$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Sábila (Aloe Vera) 500 mg', 'Frasco de 10 Cápsulas', '8$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -287,13 +312,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Multi MEN Formula</h3>
-                    <p class="descripcion">Complejo multivitamínico de alta potencia especialmente formulado para las necesidades del hombre moderno. Ayuda a reducir eficazmente la sensación de cansancio y fatiga diaria, aportando vitalidad. Contribuye a retrasar el envejecimiento prematuro gracias a su rico contenido de antioxidantes, y está enriquecido con luteína y licopeno, ayudando así a proteger la salud de la próstata y la función cardiovascular.</p>
+                    <p class="descripcion">Complejo multivitamínico de alta potencia especialmente formulado para las necesidades del hombre moderno. Ayuda a reducir eficazmente la sensación de cansancio y fatiga diaria. Enriquecido con luteína y licopeno, ayudando así a proteger la salud de la próstata.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 100 Tabletas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 25$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Multi MEN Formula', 'Frasco de 100 Tabletas', '25$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -304,13 +329,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin D3 5000 IU</h3>
-                    <p class="descripcion">Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Se utiliza eficazmente para tratar y prevenir trastornos óseos, promoviendo la correcta fijación del calcio en los huesos. Además, ofrece un apoyo fundamental al sistema inmunitario y contribuye al mantenimiento saludable de las articulaciones.</p>
+                    <p class="descripcion">Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Se utiliza eficazmente para tratar y prevenir trastornos óseos, promoviendo la correcta fijación del calcio en los huesos. Además, ofrece un apoyo fundamental al sistema inmunitario.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 100 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 22$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin D3 5000 IU', 'Frasco de 100 Cápsulas', '22$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -321,13 +346,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Selenium 200 mcg</h3>
-                    <p class="descripcion">Suplemento mineral esencial de alta pureza diseñado para el soporte del bienestar celular. Ayuda activamente a su cuerpo a producir proteínas especiales, llamadas enzimas antioxidantes, las cuales juegan un papel crucial en la protección contra el daño celular y el estrés oxidativo.</p>
+                    <p class="descripcion">Suplemento mineral esencial de alta pureza diseñado para el soporte del bienestar celular. Ayuda activamente al cuerpo a producir enzimas antioxidantes, las cuales juegan un papel crucial en la protección contra el daño celular y el estrés oxidativo.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 100 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 20$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Selenium 200 mcg', 'Frasco de 100 Cápsulas', '20$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -338,13 +363,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin E 1000 IU</h3>
-                    <p class="descripcion">Suplemento dietético esencial formulado para promover una salud cardiovascular óptima y el cuidado de la piel. Ayuda de manera activa a mantener el sistema inmunitario fuerte frente a la amenaza de virus y bacterias, asiste en la formación de glóbulos rojos y colabora en el ensanchamiento de los vasos sanguíneos para evitar que la sangre se coagule dentro de ellos.</p>
+                    <p class="descripcion">Suplemento dietético esencial formulado para promover una salud cardiovascular óptima y el cuidado de la piel. Ayuda a mantener el sistema inmunitario fuerte frente a la amenaza de virus y bacterias, y asiste en la formación de glóbulos rojos.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 50 Cápsulas Blandas (Softgels)</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 16$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin E 1000 IU', 'Frasco de 50 Cápsulas Blandas', '16$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -355,13 +380,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin C 1000mg</h3>
-                    <p class="descripcion">Poderoso suplemento a base de ácido ascórbico puro que funciona como un excelente antioxidante. Ayuda a evitar el resfriado común, fortalece los músculos, promueve la producción de colágeno y mejora la circulación sanguínea. Además, asiste eficazmente en la absorción del hierro, eleva el estado de ánimo y mejora visiblemente la textura de la piel.</p>
+                    <p class="descripcion">Poderoso suplemento a base de ácido ascórbico puro que funciona como un excelente antioxidante. Ayuda a evitar el resfriado común, fortalece los músculos, promueve la producción de colágeno y mejora la circulación sanguínea.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Tabletas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 15$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin C 1000mg', 'Frasco de 60 Tabletas', '15$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -372,13 +397,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Omega-3 Fish Oil</h3>
-                    <p class="descripcion">Suplemento de aceite de pescado puro de alta calidad. Apoya eficazmente la salud del corazón, reduce la inflamación crónica, mejora la función cerebral y la salud mental. Además, promueve el bienestar ocular, ayuda en la salud metabólica, el control del peso, mejora la salud de la piel y apoya un embarazo saludable junto al correcto desarrollo fetal.</p>
+                    <p class="descripcion">Suplemento de aceite de pescado puro de alta calidad. Apoya eficazmente la salud del corazón, reduce la inflamación crónica, mejora la función cerebral, promueve el bienestar ocular y ayuda en la salud metabólica.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas Blandas (2000 mg)</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 20$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Omega-3 Fish Oil', 'Frasco de 60 Cápsulas Blandas (2000 mg)', '20$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -389,13 +414,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Probiotics Premium</h3>
-                    <p class="descripcion">Suplemento dietético de alta potencia que actúa en el cuidado del sistema digestivo ed inmune. Es ideal para la prevención y tratamiento de la diarrea, combate activamente enfermedades digestivas, ayuda al mantenimiento del equilibrio saludable de la flora intestinal y promueve el fortalecimiento del sistema inmunológico.</p>
+                    <p class="descripcion">Suplemento dietético de alta potencia que actúa en el cuidado del sistema digestivo e inmune. Es ideal para el mantenimiento del equilibrio saludable de la flora intestinal y promueve el fortalecimiento del sistema inmunológico.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas (25 Billion CFU)</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 18$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Probiotics Premium', 'Frasco de 60 Cápsulas (25 Billion CFU)', '18$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -406,13 +431,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Maximum Creatine</h3>
-                    <p class="descripcion">Suplemento dietético diseñado para potenciar el desarrollo muscular. Promueve la mejora del volumen muscular, la actualización del rendimiento físico en tus rutinas, el aumento de la intensidad en cada ejercicio y la mejora significativa de la masa magra.</p>
+                    <p class="descripcion">Suplemento dietético diseñado para potenciar el desarrollo muscular. Promueve la mejora del volumen muscular, la optimización del rendimiento físico en tus rutinas, el aumento de la intensidad y la mejora de la masa magra.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 100 Cápsulas (1200 mg)</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 19$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum Creatine', 'Frasco de 100 Cápsulas (1200 mg)', '19$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -423,13 +448,13 @@
                 </div>
                 <div class="info-producto">
                     <h3>Maximum L-Carnitine</h3>
-                    <p class="descripcion">Suplemento dietético diseñado para el desarrollo y mantenimiento de la masa muscular. Ayuda a convertir de manera eficiente los alimentos que come en la energía limpia y activa que usted necesita para su día a día.</p>
+                    <p class="descripcion">Suplemento dietético diseñado para el desarrollo y mantenimiento de la masa muscular. Ayuda a convertir de manera eficiente los alimentos en la energía limpia y activa que necesitas para tu día a día.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 60 Cápsulas (800 mg)</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 22$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum L-Carnitine', 'Frasco de 60 Cápsulas (800 mg)', '22$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -446,58 +471,58 @@
                         <span><strong>Disponibilidad:</strong> En Stock</span>
                         <span><strong>Precio:</strong> 18$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Glucosamine Chondroitin', 'Frasco de 90 Cápsulas (2865 mg)', '18$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
-            <!-- Producto 1 (Ejemplo inicial) -->
+            <!-- Producto: Miel de Abeja -->
             <div class="tarjeta-producto">
                 <div class="imagen-producto">
-                    <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=300&q=80" alt="Miel de Abeja Orgánica">
+                    <img src="miel.jpg" alt="Miel de Abeja FECOAPI" onerror="this.src='https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=300&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Miel de Abeja Orgánica</h3>
-                    <p class="descripcion">Miel 100% pura y natural, ideal para endulzar tus bebidas, aliviar la garganta y fortalecer el sistema inmunológico.</p>
+                    <h3>Miel de Abeja FECOAPI 500g</h3>
+                    <p class="descripcion">Miel 100% pura de abeja, el aliado perfecto para tu bienestar integral. Aporta energía natural, beneficia la digestión, favorece un sueño reparador y es un excelente remedio tradicional para aliviar los síntomas del resfriado común.</p>
                     <div class="datos-consulta">
                         <span><strong>Presentación:</strong> Frasco de 500g</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> Por consultar</span>
+                        <span><strong>Precio:</strong> 7$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Miel de Abeja FECOAPI 500g', 'Frasco de 500g', '7$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
-            <!-- Producto 2 (Ejemplo inicial) -->
+            <!-- Producto: Té Verde -->
             <div class="tarjeta-producto">
                 <div class="imagen-producto">
-                    <img src="https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=300&q=80" alt="Té Verde en Hojas">
+                    <img src="teverde.jpg" alt="Té Verde Herbaplant" onerror="this.src='https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=300&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Té Verde en Hojas</h3>
-                    <p class="descripcion">Poderoso antioxidante natural que ayuda a mejorar el metabolismo, limpiar el organismo y aportar energía limpia para tu día.</p>
+                    <h3>Té Verde 500 mg (Control de Peso)</h3>
+                    <p class="descripcion">Potente antioxidante de origen natural formulado para el bienestar integral. Contribuye activamente a reducir el riesgo de enfermedades cardiovasculares, estimula el metabolismo favoreciendo la pérdida de peso de forma saludable y posee grandes propiedades antiinflamatorias. Además, ayuda a regular los niveles de azúcar en la sangre, mejora la salud de la piel y apoya la función cognitiva y cerebral.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Bolsas de 100g</span>
+                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> Por consultar</span>
+                        <span><strong>Precio:</strong> 10$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Té Verde 500 mg', 'Frasco de 60 Cápsulas', '10$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
-            <!-- Producto 3 (Ejemplo inicial) -->
+            <!-- Producto: Colágeno Hidrolizado (Actualizado) -->
             <div class="tarjeta-producto">
                 <div class="imagen-producto">
-                    <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=300&q=80" alt="Colágeno Hidrolizado">
+                    <img src="colageno.jpg" alt="Colágeno Hidrolizado Varit Labs" onerror="this.src='https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=300&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Colágeno Hidrolizado</h3>
-                    <p class="descripcion">Suplemento premium recomendado para el fortalecimiento de articulaciones, huesos, elasticidad de la piel y salud capilar.</p>
+                    <h3>Colágeno Hidrolizado + Vitamina C (Gomitas)</h3>
+                    <p class="descripcion">Suplemento premium en prácticas gomitas masticables formulado para el cuidado del sistema óseo y articular. Ofrece un excelente efecto terapéutico sobre la osteoporosis y la osteoartritis, mejora notablemente los síntomas del dolor y contribuye de manera directa a la salud de los huesos. Además, ayuda a aumentar la densidad mineral ósea y protege el cartílago articular frente al desgaste diario.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 300g</span>
-                        <span><strong>Disponibilidad:</strong> Pocas Unidades</span>
-                        <span><strong>Precio:</strong> Por consultar</span>
+                        <span><strong>Presentación:</strong> Frasco de 60 Gomitas (Sabor Parchita)</span>
+                        <span><strong>Disponibilidad:</strong> En Stock</span>
+                        <span><strong>Precio:</strong> 12$</span>
                     </div>
-                    <button class="btn-consultar">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Colágeno Hidrolizado + Vitamina C (Gomitas)', 'Frasco de 60 Gomitas (Sabor Parchita)', '12$')">Consultar Disponibilidad</button>
                 </div>
             </div>
 
@@ -511,5 +536,39 @@
         <p class="rif-footer">V-11114012-6</p>
     </footer>
 
+    <!-- Lógica de Interactividad en JavaScript -->
+    <script>
+        function filtrarProductos() {
+            const busqueda = document.getElementById('buscador').value.toLowerCase();
+            const tarjetas = document.getElementsByClassName('tarjeta-producto');
+
+            for (let i = 0; i < tarjetas.length; i++) {
+                const titulo = tarjetas[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (titulo.includes(busqueda)) {
+                    tarjetas[i].style.display = "";
+                } else {
+                    tarjetas[i].style.display = "none";
+                }
+            }
+        }
+
+        function enviarWhatsApp(nombreProducto, presentacion, precio) {
+            const numeroTelefono = "584124206454"; 
+            let nombreCliente = prompt("Por favor, ingresa tu nombre para personalizar tu consulta:");
+            let saludo = "Hola, vengo de su Catálogo Digital.";
+            
+            if (nombreCliente && nombreCliente.trim() !== "") {
+                saludo = `Hola, mi nombre es *${nombreCliente.trim()}*. Vengo de su Catálogo Digital y...`;
+            }
+
+            let mensaje = `${saludo}\n\nMe gustaría consultar la disponibilidad de:\n\n`;
+            mensaje += `📦 *Producto:* ${nombreProducto}\n`;
+            mensaje += `🔹 *Presentación:* ${presentacion}\n`;
+            mensaje += `💰 *Precio:* ${precio}`;
+
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            window.open(`https://wa.me/${numeroTelefono}?text=${mensajeCodificado}`, '_blank');
+        }
+    </script>
 </body>
 </html>
