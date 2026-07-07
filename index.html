@@ -5,215 +5,337 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro Naturista Donde Jairo - Catálogo Digital</title>
     
-    <!-- Estilos CSS Integrados basados en el Logo -->
+    <!-- Logotipo en la pestaña del navegador (Favicon) -->
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    
     <style>
-        /* Estilos Generales y Reseteo */
+        :root {
+            /* Paleta basada en el logo: Azul Noche Profundo y Verde Natural */
+            --color-primario: #0f2d4a; 
+            --color-secundario: #5b9624; 
+            --color-azul-borde: #1e3a5f; /* Azul para los marcos de los productos */
+            --color-fondo-base: #f4f7fa;
+            --color-tarjeta: #ffffff;
+            --color-texto: #1e293b; 
+            --color-texto-suave: #64748b; 
+            --color-acento: #0284c7; 
+            --color-badge: #f1f5f9; 
+            --fuente-principal: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --sombra-suave: 0 4px 20px -2px rgba(15, 45, 74, 0.05), 0 2px 6px -1px rgba(15, 45, 74, 0.03);
+            --sombra-hover: 0 20px 25px -5px rgba(15, 45, 74, 0.12), 0 10px 10px -5px rgba(15, 45, 74, 0.06);
+            --radio: 16px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--fuente-principal);
         }
 
         body {
-            background-color: #f7faf6;
-            color: #333;
+            /* Difuminado suave de fondo para toda la página */
+            background: linear-gradient(180deg, #f4f7fa 0%, #e9eff5 100%);
+            color: var(--color-texto);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* Encabezado con el degradado del logo */
+        /* Encabezado con difuminado (Gradient) que une el Azul del logo con el Verde */
         header {
-            background: linear-gradient(135deg, #8bc34a 0%, #174461 100%);
+            background: linear-gradient(135deg, var(--color-primario) 0%, #1a426a 50%, var(--color-secundario) 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 65px 20px;
             text-align: center;
-            border-bottom: 5px solid #7cb342;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(15, 45, 74, 0.15);
         }
 
         .contenedor-header {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Espacio para el Logo */
         .logo-centro {
-            max-width: 120px;
-            height: auto;
-            border-radius: 50%;
+            width: 105px;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 28px; 
             background-color: white;
             padding: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
         }
 
         header h1 {
-            font-size: 2.6rem;
-            margin-bottom: 5px;
+            font-size: 2.8rem;
             font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            font-style: italic;
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            font-weight: 400;
+            margin-top: 5px;
         }
 
-        /* Contenedor Principal */
         .contenedor-principal {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 40px 24px 60px 24px;
         }
 
-        .titulo-seccion {
-            text-align: center;
-            color: #174461;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .subtitulo-seccion {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        /* Barra de búsqueda */
-        .contenedor-busqueda {
-            max-width: 500px;
-            margin: 0 auto 40px auto;
+        /* Controles de Filtros y Búsqueda */
+        .controles-navegacion {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
             display: flex;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contenedor-busqueda {
+            box-shadow: var(--sombra-suave);
+            border-radius: 50px;
             overflow: hidden;
-            border: 2px solid #8bc34a;
+            border: 1px solid #cbd5e1;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contenedor-busqueda:focus-within {
+            box-shadow: 0 10px 25px -5px rgba(15, 45, 74, 0.15);
+            border-color: var(--color-azul-borde);
         }
 
         .contenedor-busqueda input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 16px 28px;
             border: none;
             outline: none;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            color: var(--color-texto);
+            background: transparent;
+        }
+
+        /* Botones de Categorías */
+        .filtros-categorias {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filtro {
+            background-color: white;
+            color: var(--color-primario);
+            border: 1px solid #cbd5e1;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .btn-filtro:hover {
+            border-color: var(--color-secundario);
+            color: var(--color-secundario);
+        }
+
+        /* Botón activo con difuminado verde del logo */
+        .btn-filtro.activo {
+            background: linear-gradient(135deg, var(--color-secundario) 0%, #4a7d1b 100%);
+            color: white;
+            border-color: var(--color-secundario);
+            box-shadow: 0 4px 12px rgba(91, 150, 36, 0.3);
         }
 
         /* Grilla de productos */
         .grilla-productos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
         }
 
-        /* Tarjeta con el marco Verde Manzana del logo */
+        /* Tarjeta de Producto con Marco Azul Solicitado */
         .tarjeta-producto {
-            background-color: white;
-            border-radius: 12px;
+            background-color: var(--color-tarjeta);
+            border-radius: var(--radio);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
             display: flex;
             flex-direction: column;
-            border: 2px solid #8bc34a;
+            border: 2px solid var(--color-azul-borde); /* Marco azul solicitado */
         }
 
-        /* Al pasar el mouse, el marco toma el tono azul */
         .tarjeta-producto:hover {
-            transform: translateY(-8px);
-            border-color: #0081c2;
-            box-shadow: 0 8px 20px rgba(0,81,194,0.15);
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-secundario); /* Cambia suavemente a verde al pasar el mouse */
+        }
+
+        .imagen-producto {
+            position: relative;
+            background-color: #f8fafc;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .imagen-producto img {
             width: 100%;
-            height: 210px;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 1px solid #e0e0e0;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tarjeta-producto:hover .imagen-producto img {
+            transform: scale(1.05);
+        }
+
+        /* Etiquetas flotantes sobre la imagen usando el difuminado azul del logo */
+        .tag-categoria {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #1e3a5f 100%);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 2;
         }
 
         .info-producto {
-            padding: 20px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .info-producto h3 {
-            color: #174461;
+            color: var(--color-primario);
             margin-bottom: 10px;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
         }
 
         .info-producto .descripcion {
             font-size: 0.95rem;
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            color: var(--color-texto-suave);
+            margin-bottom: 24px;
             flex-grow: 1;
+            line-height: 1.6;
         }
 
-        /* Datos de consulta con el naranja como detalle */
         .datos-consulta {
-            background-color: #f2f7ee;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.88rem;
+            background-color: var(--color-badge);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.9rem;
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             gap: 6px;
-            border-left: 4px solid #f39221;
+            border: 1px solid #e2e8f0;
         }
 
-        /* Botón con el azul de la personita del logo */
+        .datos-consulta span {
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .datos-consulta strong {
+            color: var(--color-primario);
+            font-weight: 600;
+        }
+
+        .precio-tag {
+            color: var(--color-secundario) !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem;
+        }
+
+        /* Botón de acción con difuminado corporativo (Azul oscuro del logo) */
         .btn-consultar {
-            background-color: #0081c2;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #1b4772 100%);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: all 0.3s ease;
             text-align: center;
-            box-shadow: 0 3px 6px rgba(0,129,194,0.2);
             text-decoration: none;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(15, 45, 74, 0.2);
         }
 
         .btn-consultar:hover {
-            background-color: #00669b;
-            transform: scale(1.02);
+            background: linear-gradient(135deg, #1b4772 0%, var(--color-primario) 100%);
+            box-shadow: 0 6px 16px rgba(15, 45, 74, 0.3);
+        }
+        
+        .btn-consultar:active {
+            transform: scale(0.98);
         }
 
-        /* Pie de Página */
         footer {
-            background-color: #174461;
-            color: #e0e0e0;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #081a2b 100%);
+            color: #94a3b8;
             text-align: center;
-            padding: 35px 20px;
-            margin-top: 80px;
+            padding: 60px 20px;
+            margin-top: 100px;
             font-size: 0.9rem;
-            border-top: 4px solid #8bc34a;
+            border-top: 2px solid var(--color-secundario);
         }
 
         footer p {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .rif-footer {
-            font-weight: bold;
-            color: #8bc34a;
-            margin-top: 5px;
-            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-secundario);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .sin-resultados {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px;
+            color: var(--color-texto-suave);
+            font-size: 1.1rem;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado / Header -->
     <header>
         <div class="contenedor-header">
             <img class="logo-centro" src="logo.jpg" alt="Logo Centro Naturista" onerror="this.style.display='none';">
@@ -224,332 +346,372 @@
         </div>
     </header>
 
-    <!-- Sección Principal del Catálogo -->
     <main class="contenedor-principal">
-        <h2 class="titulo-seccion">Nuestro Catálogo de Productos</h2>
-        <p class="subtitulo-seccion">Explora nuestra oferta disponible para el cuidado de tu salud.</p>
-
-        <!-- Buscador de productos -->
-        <div class="contenedor-busqueda">
-            <input type="text" id="buscador" placeholder="Buscar producto por nombre..." onkeyup="filtrarProductos()">
+        
+        <!-- Sección de Filtros y Búsqueda -->
+        <div class="controles-navegacion">
+            <div class="contenedor-busqueda">
+                <input type="text" id="buscador" placeholder="Buscar un producto..." aria-label="Buscar producto">
+            </div>
+            
+            <div class="filtros-categorias">
+                <button class="btn-filtro activo" onclick="filtrarCategoria('todos', this)">Todos</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('suplementos', this)">Suplementos y Vitaminas</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('deportiva', this)">Línea Deportiva</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('tes', this)">Tés e Infusiones</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('bienestar', this)">Cuidado Digestivo y Bienestar</button>
+            </div>
         </div>
 
         <!-- Grilla de Productos -->
         <div class="grilla-productos" id="grilla">
+            <div id="sinResultados" class="sin-resultados">
+                No encontramos productos en esta categoría que coincidan con tu búsqueda.
+            </div>
 
-            <!-- Producto: Prostaplant 500 mg -->
-            <div class="tarjeta-producto">
+            <!-- CATEGORÍA: SUPLEMENTOS Y VITAMINAS -->
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="prostaplant 500 mg cuidado de la próstata">
                 <div class="imagen-producto">
-                    <img src="prostaplant.jpg" alt="Prostaplant Herbaplant" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="prostaplant.jpg" alt="Prostaplant" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Prostaplant 500 mg (Cuidado de la Próstata)</h3>
-                    <p class="descripcion">Suplemento de origen natural formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un efectivo desinflamatorio de la próstata, ayudando a aliviar las molestias asociadas a su agrandamiento y contribuye directamente a disminuir la micción frecuente.</p>
+                    <h3>Prostaplant 500 mg</h3>
+                    <p class="descripcion">Formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un desinflamatorio natural de la próstata.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
+                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 19$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Prostaplant 500 mg', 'Frasco de 60 Cápsulas', '19$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Prostaplant 500 mg', 'Frasco de 60 Cápsulas', '19$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Muxer 500 mg -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="muxer 500 mg climaterio y menopausia">
                 <div class="imagen-producto">
-                    <img src="muxer.jpg" alt="Muxer Herbaplant" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="muxer.jpg" alt="Muxer" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Muxer 500 mg (Climaterio y Menopausia)</h3>
-                    <p class="descripcion">Suplemento natural especialmente formulado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece un soporte eficaz en la regulación hormonal, contribuyendo al alivio de los trastornos menstruales, los incómodos calorones y la resequedad vaginal.</p>
+                    <h3>Muxer 500 mg</h3>
+                    <p class="descripcion">Soporte natural especialmente desarrollado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece regulación hormonal.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
+                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 16$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">16$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Muxer 500 mg', 'Frasco de 60 Cápsulas', '16$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Muxer 500 mg', 'Frasco de 60 Cápsulas', '16$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Magnetrol X5 -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="magnetrol x5 5 tipos de magnesios">
                 <div class="imagen-producto">
-                    <img src="magnetrol.jpg" alt="Magnetrol X5 Walife" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="magnetrol.jpg" alt="Magnetrol X5" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Magnetrol X5 (5 Tipos de Magnesios)</h3>
-                    <p class="descripcion">Fórmula premium avanzada que combina 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato) logrando un 98% de absorción. Favorece el óptimo funcionamiento del sistema nervioso y muscular, reduce el estrés cotidiano e impulsa el metabolismo energético.</p>
+                    <h3>Magnetrol X5</h3>
+                    <p class="descripcion">Fórmula avanzada con 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato). Logra un 98% de absorción ideal para el sistema nervioso.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas Veganas</span>
+                        <span><strong>Presentación:</strong> 60 Cápsulas Veganas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 19$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Magnetrol X5', 'Frasco de 60 Cápsulas Veganas', '19$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Magnetrol X5', 'Frasco de 60 Cápsulas Veganas', '19$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Sábila (Aloe Vera) -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin d3 5000 iu vitamina d3">
                 <div class="imagen-producto">
-                    <img src="sabila.jpg" alt="Sábila Aloe Vera Laboratorio La Abejita" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
-                </div>
-                <div class="info-producto">
-                    <h3>Sábila (Aloe Vera) 500 mg</h3>
-                    <p class="descripcion">Suplemento natural elaborado a base de extracto puro de Aloe Vera. Es una solución tradicional y efectiva que ayuda a combatir el estreñimiento, actuando como un suave regulador del tránsito intestinal. Además, promueve la desinflamación del sistema digestivo y protege la mucosa gástrica.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 10 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 8$</span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Sábila (Aloe Vera) 500 mg', 'Frasco de 10 Cápsulas', '8$')">Consultar Disponibilidad</button>
-                </div>
-            </div>
-
-            <!-- Producto: Multi MEN -->
-            <div class="tarjeta-producto">
-                <div class="imagen-producto">
-                    <img src="multimen.jpg" alt="Multi MEN Alfa Vitamins" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
-                </div>
-                <div class="info-producto">
-                    <h3>Multi MEN Formula</h3>
-                    <p class="descripcion">Complejo multivitamínico de alta potencia especialmente formulado para las necesidades del hombre moderno. Ayuda a reducir eficazmente la sensación de cansancio y fatiga diaria. Enriquecido con luteína y licopeno, ayudando así a proteger la salud de la próstata.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 100 Tabletas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 25$</span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Multi MEN Formula', 'Frasco de 100 Tabletas', '25$')">Consultar Disponibilidad</button>
-                </div>
-            </div>
-
-            <!-- Producto: Vitamin D3 -->
-            <div class="tarjeta-producto">
-                <div class="imagen-producto">
-                    <img src="vitaminad3.jpg" alt="Vitamin D3 Alfa Vitamins" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="vitaminad3.jpg" alt="Vitamin D3" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin D3 5000 IU</h3>
-                    <p class="descripcion">Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Se utiliza eficazmente para tratar y prevenir trastornos óseos, promoviendo la correcta fijación del calcio en los huesos. Además, ofrece un apoyo fundamental al sistema inmunitario.</p>
+                    <p class="descripcion">Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Promueve la fijación de calcio en los huesos y fortalece el sistema inmunológico.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 100 Cápsulas</span>
+                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 22$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">22$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin D3 5000 IU', 'Frasco de 100 Cápsulas', '22$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin D3 5000 IU', 'Frasco de 100 Cápsulas', '22$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Selenium -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="selenium 200 mcg selenio">
                 <div class="imagen-producto">
-                    <img src="selenio.jpg" alt="Selenium Alfa Vitamins" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="selenio.jpg" alt="Selenium" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Selenium 200 mcg</h3>
-                    <p class="descripcion">Suplemento mineral esencial de alta pureza diseñado para el soporte del bienestar celular. Ayuda activamente al cuerpo a producir enzimas antioxidantes, las cuales juegan un papel crucial en la protección contra el daño celular y el estrés oxidativo.</p>
+                    <p class="descripcion">Mineral esencial puro diseñado para el soporte del bienestar celular. Juega un papel fundamental en la protección contra el daño y el estrés oxidativo.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 100 Cápsulas</span>
+                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 20$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">20$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Selenium 200 mcg', 'Frasco de 100 Cápsulas', '20$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Selenium 200 mcg', 'Frasco de 100 Cápsulas', '20$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Vitamin E -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin e 1000 iu vitamina e">
                 <div class="imagen-producto">
-                    <img src="vitaminae.jpg" alt="Vitamin E Alfa Vitamins" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="vitaminae.jpg" alt="Vitamin E" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin E 1000 IU</h3>
-                    <p class="descripcion">Suplemento dietético esencial formulado para promover una salud cardiovascular óptima y el cuidado de la piel. Ayuda a mantener el sistema inmunitario fuerte frente a la amenaza de virus y bacterias, y asiste en la formación de glóbulos rojos.</p>
+                    <p class="descripcion">Diseñado para promover una salud cardiovascular óptima y el cuidado profundo de los tejidos de la piel. Mantiene el sistema inmune fuerte.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 50 Cápsulas Blandas (Softgels)</span>
+                        <span><strong>Presentación:</strong> 50 Cápsulas Blandas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 16$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">16$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin E 1000 IU', 'Frasco de 50 Cápsulas Blandas', '16$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin E 1000 IU', 'Frasco de 50 Cápsulas Blandas', '16$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Vitamin C -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin c 1000mg vitamina c">
                 <div class="imagen-producto">
-                    <img src="vitaminac.jpg" alt="Vitamin C Pharmacorp" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="vitaminac.jpg" alt="Vitamin C" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Vitamin C 1000mg</h3>
-                    <p class="descripcion">Poderoso suplemento a base de ácido ascórbico puro que funciona como un excelente antioxidante. Ayuda a evitar el resfriado común, fortalece los músculos, promueve la producción de colágeno y mejora la circulación sanguínea.</p>
+                    <p class="descripcion">Poderoso antioxidante a base de ácido ascórbico puro. Ayuda a prevenir afecciones respiratorias cotidianas y promueve la producción activa de colágeno.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Tabletas</span>
+                        <span><strong>Presentación:</strong> 60 Tabletas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 15$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">15$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin C 1000mg', 'Frasco de 60 Tabletas', '15$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin C 1000mg', 'Frasco de 60 Tabletas', '15$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Omega-3 Fish Oil -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="omega-3 fish oil omega 3 aceite de pescado">
                 <div class="imagen-producto">
-                    <img src="omega3.jpg" alt="Omega-3 Fish Oil Pharmacorp" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="omega3.jpg" alt="Omega-3" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Omega-3 Fish Oil</h3>
-                    <p class="descripcion">Suplemento de aceite de pescado puro de alta calidad. Apoya eficazmente la salud del corazón, reduce la inflamación crónica, mejora la función cerebral, promueve el bienestar ocular y ayuda en la salud metabólica.</p>
+                    <p class="descripcion">Aceite de pescado premium de alta calidad. Apoya el sistema cardiovascular, asiste en reducir la inflamación celular y mejora el rendimiento cerebral.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas Blandas (2000 mg)</span>
+                        <span><strong>Presentación:</strong> 60 Cápsulas Blandas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 20$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">20$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Omega-3 Fish Oil', 'Frasco de 60 Cápsulas Blandas (2000 mg)', '20$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Omega-3 Fish Oil', 'Frasco de 60 Cápsulas Blandas (2000 mg)', '20$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Probiotics Premium -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="multi men formula multivitaminico hombres">
                 <div class="imagen-producto">
-                    <img src="probioticos.jpg" alt="Probiotics Premium Pharmacorp" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Suplementos</span>
+                    <img src="multimen.jpg" alt="Multi MEN" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Probiotics Premium</h3>
-                    <p class="descripcion">Suplemento dietético de alta potencia que actúa en el cuidado del sistema digestivo e inmune. Es ideal para el mantenimiento del equilibrio saludable de la flora intestinal y promueve el fortalecimiento del sistema inmunológico.</p>
+                    <h3>Multi MEN Formula</h3>
+                    <p class="descripcion">Complejo vitamínico integral formulado para las demandas diarias del hombre. Reduce la fatiga y aporta antioxidantes claves como el licopeno.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas (25 Billion CFU)</span>
+                        <span><strong>Presentación:</strong> 100 Tabletas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 18$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">25$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Probiotics Premium', 'Frasco de 60 Cápsulas (25 Billion CFU)', '18$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Multi MEN Formula', 'Frasco de 100 Tabletas', '25$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Maximum Creatine -->
-            <div class="tarjeta-producto">
+
+            <!-- CATEGORÍA: LÍNEA DEPORTIVA -->
+            <div class="tarjeta-producto" data-categoria="deportiva" data-nombre="maximum creatine creatina rendimiento muscular">
                 <div class="imagen-producto">
-                    <img src="creatina.jpg" alt="Maximum Creatine Alfa Sports" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Deportiva</span>
+                    <img src="creatina.jpg" alt="Creatine" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Maximum Creatine</h3>
-                    <p class="descripcion">Suplemento dietético diseñado para potenciar el desarrollo muscular. Promueve la mejora del volumen muscular, la optimización del rendimiento físico en tus rutinas, el aumento de la intensidad y la mejora de la masa magra.</p>
+                    <p class="descripcion">Diseñado para potenciar la fuerza y el desarrollo muscular. Optimiza el rendimiento físico en entrenamientos exigentes de alta intensidad.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 100 Cápsulas (1200 mg)</span>
+                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 19$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum Creatine', 'Frasco de 100 Cápsulas (1200 mg)', '19$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum Creatine', 'Frasco de 100 Cápsulas (1200 mg)', '19$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Maximum L-Carnitine -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="deportiva" data-nombre="maximum l-carnitine l-carnitina carnitina energia">
                 <div class="imagen-producto">
-                    <img src="lcarnitina.jpg" alt="Maximum L-Carnitine Alfa Sports" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Deportiva</span>
+                    <img src="lcarnitina.jpg" alt="L-Carnitine" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Maximum L-Carnitine</h3>
-                    <p class="descripcion">Suplemento dietético diseñado para el desarrollo y mantenimiento de la masa muscular. Ayuda a convertir de manera eficiente los alimentos en la energía limpia y activa que necesitas para tu día a día.</p>
+                    <p class="descripcion">Suplemento aminoácido ideal para la conversión de ácidos grasos en energía limpia. Apoya el rendimiento y el mantenimiento de masa magra.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas (800 mg)</span>
+                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 22$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">22$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum L-Carnitine', 'Frasco de 60 Cápsulas (800 mg)', '22$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum L-Carnitine', 'Frasco de 60 Cápsulas (800 mg)', '22$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Glucosamine Chondroitin -->
-            <div class="tarjeta-producto">
+
+            <!-- CATEGORÍA: TÉS E INFUSIONES -->
+            <div class="tarjeta-producto" data-categoria="tes" data-nombre="té verde 500 mg control de peso antioxidante">
                 <div class="imagen-producto">
-                    <img src="glucosamina.jpg" alt="Glucosamine Chondroitin Pharmacorp" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Tés e Infusiones</span>
+                    <img src="teverde.jpg" alt="Té Verde" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=400&q=80';">
+                </div>
+                <div class="info-producto">
+                    <h3>Té Verde 500 mg</h3>
+                    <p class="descripcion">Poderoso antioxidante botánico concentrado. Estimula suavemente el metabolismo celular, apoyando los procesos de pérdida de peso saludable.</p>
+                    <div class="datos-consulta">
+                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
+                        <span><strong>Disponibilidad:</strong> En Stock</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">10$</span></span>
+                    </div>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Té Verde 500 mg', 'Frasco de 60 Cápsulas', '10$')">Consultar Producto</button>
+                </div>
+            </div>
+
+
+            <!-- CATEGORÍA: DIGESTIVO Y BIENESTAR GENERAL -->
+            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="sábila aloe vera 500 mg digestion estomago">
+                <div class="imagen-producto">
+                    <span class="tag-categoria">Bienestar</span>
+                    <img src="sabila.jpg" alt="Sábila" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
+                </div>
+                <div class="info-producto">
+                    <h3>Sábila (Aloe Vera) 500 mg</h3>
+                    <p class="descripcion">Extracto puro ideal para regular el tránsito intestinal suavemente. Promueve el alivio de la pesadez y actúa protegiendo la mucosa gástrica.</p>
+                    <div class="datos-consulta">
+                        <span><strong>Presentación:</strong> 10 Cápsulas</span>
+                        <span><strong>Disponibilidad:</strong> En Stock</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">8$</span></span>
+                    </div>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Sábila (Aloe Vera) 500 mg', 'Frasco de 10 Cápsulas', '8$')">Consultar Producto</button>
+                </div>
+            </div>
+
+            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="probiotics premium probioticos flora intestinal">
+                <div class="imagen-producto">
+                    <span class="tag-categoria">Bienestar</span>
+                    <img src="probioticos.jpg" alt="Probiotics" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
+                </div>
+                <div class="info-producto">
+                    <h3>Probiotics Premium</h3>
+                    <p class="descripcion">Suplemento de alta potencia con 25 Billion CFU. Diseñado para repoblar de forma saludable y equilibrar la flora bacteriana del sistema digestivo.</p>
+                    <div class="datos-consulta">
+                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
+                        <span><strong>Disponibilidad:</strong> En Stock</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">18$</span></span>
+                    </div>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Probiotics Premium', 'Frasco de 60 Cápsulas (25 Billion CFU)', '18$')">Consultar Producto</button>
+                </div>
+            </div>
+
+            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="glucosamine chondroitin glucosamina articulaciones colageno">
+                <div class="imagen-producto">
+                    <span class="tag-categoria">Bienestar</span>
+                    <img src="glucosamina.jpg" alt="Glucosamine" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
                     <h3>Glucosamine Chondroitin</h3>
-                    <p class="descripcion">Fórmula avanzada con Ácido Hialurónico, Colágeno y MSM. Ayuda a la recuperación del músculo, disminuye el dolor muscular, evita los calambres y contribuye de manera eficaz a la regeneración natural del colágeno en el cuerpo.</p>
+                    <p class="descripcion">Fórmula con Ácido Hialurónico, Colágeno y MSM. Ayuda al mantenimiento y flexibilidad de las articulaciones frente al desgaste cotidiano.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 90 Cápsulas (2865 mg)</span>
+                        <span><strong>Presentación:</strong> 90 Cápsulas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 18$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">18$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Glucosamine Chondroitin', 'Frasco de 90 Cápsulas (2865 mg)', '18$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Glucosamine Chondroitin', 'Frasco de 90 Cápsulas (2865 mg)', '18$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Miel de Abeja -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="miel de abeja fecoapi pura energia natural">
                 <div class="imagen-producto">
-                    <img src="miel.jpg" alt="Miel de Abeja FECOAPI" onerror="this.src='https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Bienestar</span>
+                    <img src="miel.jpg" alt="Miel" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Miel de Abeja FECOAPI 500g</h3>
-                    <p class="descripcion">Miel 100% pura de abeja, el aliado perfecto para tu bienestar integral. Aporta energía natural, beneficia la digestión, favorece un sueño reparador y es un excelente remedio tradicional para aliviar los síntomas del resfriado común.</p>
+                    <h3>Miel de Abeja FECOAPI</h3>
+                    <p class="descripcion">Miel artesanal 100% pura. Excelente endulzante biológico que aporta energía natural, apoya la digestión y calma molestias de garganta.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 500g</span>
+                        <span><strong>Presentación:</strong> 500g</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 7$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">7$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Miel de Abeja FECOAPI 500g', 'Frasco de 500g', '7$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Miel de Abeja FECOAPI 500g', 'Frasco de 500g', '7$')">Consultar Producto</button>
                 </div>
             </div>
 
-            <!-- Producto: Té Verde -->
-            <div class="tarjeta-producto">
+            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="colágeno hidrolizado vitamina c gomitas huesos articulaciones">
                 <div class="imagen-producto">
-                    <img src="teverde.jpg" alt="Té Verde Herbaplant" onerror="this.src='https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=300&q=80';">
+                    <span class="tag-categoria">Bienestar</span>
+                    <img src="colageno.jpg" alt="Colágeno" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=400&q=80';">
                 </div>
                 <div class="info-producto">
-                    <h3>Té Verde 500 mg (Control de Peso)</h3>
-                    <p class="descripcion">Potente antioxidante de origen natural formulado para el bienestar integral. Contribuye activamente a reducir el riesgo de enfermedades cardiovasculares, estimula el metabolismo favoreciendo la pérdida de peso de forma saludable y posee grandes propiedades antiinflamatorias. Además, ayuda a regular los niveles de azúcar en la sangre, mejora la salud de la piel y apoya la función cognitiva y cerebral.</p>
+                    <h3>Colágeno + Vitamina C</h3>
+                    <p class="descripcion">Gomitas funcionales masticables sabor parchita. Apoyan la densidad mineral ósea y asisten en la protección del cartílago articular.</p>
                     <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Cápsulas</span>
+                        <span><strong>Presentación:</strong> 60 Gomitas</span>
                         <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 10$</span>
+                        <span><strong>Precio:</strong> <span class="precio-tag">12$</span></span>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Té Verde 500 mg', 'Frasco de 60 Cápsulas', '10$')">Consultar Disponibilidad</button>
-                </div>
-            </div>
-
-            <!-- Producto: Colágeno Hidrolizado (Actualizado) -->
-            <div class="tarjeta-producto">
-                <div class="imagen-producto">
-                    <img src="colageno.jpg" alt="Colágeno Hidrolizado Varit Labs" onerror="this.src='https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=300&q=80';">
-                </div>
-                <div class="info-producto">
-                    <h3>Colágeno Hidrolizado + Vitamina C (Gomitas)</h3>
-                    <p class="descripcion">Suplemento premium en prácticas gomitas masticables formulado para el cuidado del sistema óseo y articular. Ofrece un excelente efecto terapéutico sobre la osteoporosis y la osteoartritis, mejora notablemente los síntomas del dolor y contribuye de manera directa a la salud de los huesos. Además, ayuda a aumentar la densidad mineral ósea y protege el cartílago articular frente al desgaste diario.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> Frasco de 60 Gomitas (Sabor Parchita)</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> 12$</span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Colágeno Hidrolizado + Vitamina C (Gomitas)', 'Frasco de 60 Gomitas (Sabor Parchita)', '12$')">Consultar Disponibilidad</button>
+                    <button class="btn-consultar" onclick="enviarWhatsApp('Colágeno Hidrolizado + Vitamina C (Gomitas)', 'Frasco de 60 Gomitas (Sabor Parchita)', '12$')">Consultar Producto</button>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Pie de Página / Footer -->
     <footer>
         <p>&copy; 2026 Centro Naturista Donde Jairo. Todos los derechos reservados.</p>
         <p>Rubio, Táchira, Venezuela.</p>
         <p class="rif-footer">V-11114012-6</p>
     </footer>
 
-    <!-- Lógica de Interactividad en JavaScript -->
     <script>
-        function filtrarProductos() {
-            const busqueda = document.getElementById('buscador').value.toLowerCase();
-            const tarjetas = document.getElementsByClassName('tarjeta-producto');
+        let categoriaActual = 'todos';
 
-            for (let i = 0; i < tarjetas.length; i++) {
-                const titulo = tarjetas[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                if (titulo.includes(busqueda)) {
-                    tarjetas[i].style.display = "";
+        function filtrarCategoria(categoria, botonSeleccionado) {
+            categoriaActual = categoria;
+            
+            document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
+            botonSeleccionado.classList.add('activo');
+            
+            aplicarFiltroCombinado();
+        }
+
+        document.getElementById('buscador').addEventListener('input', function() {
+            aplicarFiltroCombinado();
+        });
+
+        function aplicarFiltroCombinado() {
+            const busqueda = document.getElementById('buscador').value.toLowerCase().trim();
+            const tarjetas = document.querySelectorAll('.tarjeta-producto');
+            const avisoSinResultados = document.getElementById('sinResultados');
+            let encontrados = 0;
+
+            tarjetas.forEach(tarjeta => {
+                const categoriaTarjeta = tarjeta.getAttribute('data-categoria');
+                const nombreProducto = tarjeta.getAttribute('data-nombre');
+                
+                const cumpleCategoria = (categoriaActual === 'todos' || categoriaTarjeta === categoriaActual);
+                const cumpleBusqueda = nombreProducto.includes(busqueda);
+
+                if (cumpleCategoria && cumpleBusqueda) {
+                    tarjeta.style.display = "";
+                    encontrados++;
                 } else {
-                    tarjetas[i].style.display = "none";
+                    tarjeta.style.display = "none";
                 }
-            }
+            });
+
+            avisoSinResultados.style.display = encontrados === 0 ? "block" : "none";
         }
 
         function enviarWhatsApp(nombreProducto, presentacion, precio) {
@@ -562,7 +724,7 @@
             }
 
             let mensaje = `${saludo}\n\nMe gustaría consultar la disponibilidad de:\n\n`;
-            mensaje += `📦 *Producto:* ${nombreProducto}\n`;
+            text = mensaje += `📦 *Producto:* ${nombreProducto}\n`;
             mensaje += `🔹 *Presentación:* ${presentacion}\n`;
             mensaje += `💰 *Precio:* ${precio}`;
 
