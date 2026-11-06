@@ -48,25 +48,34 @@
             gap: 20px;
         }
 
-        /* BARRA SUPERIOR Y MENÚ DESPLEGABLE UNIVERSAL (PC Y MÓVIL) */
+        /* BARRA SUPERIOR Y MENÚ DESPLEGABLE CORREGIDO */
         .barra-navegacion-superior {
             background-color: var(--color-primario);
             border-bottom: 2px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            padding: 12px 30px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .barra-navegacion-superior h2 { 
-            font-size: 1.05rem; 
+            font-size: 0.95rem; 
             color: #ffffff; 
             font-weight: 900; 
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
+            flex-grow: 1;
+            min-width: 180px;
+        }
+
+        .menu-wrapper {
+            position: relative;
+            margin-left: auto;
         }
 
         .btn-hamburguesa {
@@ -74,11 +83,12 @@
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
             padding: 6px 14px;
             border-radius: 8px;
             transition: 0.2s;
+            white-space: nowrap;
         }
         .btn-hamburguesa:hover {
             background: rgba(255, 255, 255, 0.3);
@@ -88,16 +98,16 @@
             display: none;
             flex-direction: column;
             position: absolute;
-            top: 100%;
-            right: 20px;
-            width: 260px;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 250px;
             background-color: var(--color-primario);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-top: 2px solid var(--color-secundario);
-            border-radius: 0 0 12px 12px;
-            padding: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-            gap: 10px;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            gap: 8px;
             z-index: 1100;
         }
         .nav-botones.desplegado { display: flex; }
@@ -106,17 +116,17 @@
             text-decoration: none;
             color: #ffffff;
             font-weight: 700;
-            padding: 10px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
             font-size: 0.95rem;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.2s ease;
             cursor: pointer;
             text-align: left;
             width: 100%;
         }
-        .nav-btn:hover { background-color: rgba(255, 255, 255, 0.25); color: #ffffff; }
+        .nav-btn:hover { background-color: rgba(255, 255, 255, 0.2); color: #ffffff; }
         .nav-btn.active { background-color: var(--color-secundario); color: white; border-color: transparent; }
 
         .badge-carrito {
@@ -302,15 +312,17 @@
 
     <header class="barra-navegacion-superior">
         <h2>CENTRO NATURISTA DONDE JAIRO</h2>
-        <button class="btn-hamburguesa" onclick="toggleMenuMenu()" aria-label="Abrir menú">☰ Menú</button>
-        <nav class="nav-botones" id="menuNavegacion">
-            <button class="nav-btn active" onclick="mostrarSeccion('inicio', this)">Inicio</button>
-            <button class="nav-btn" onclick="mostrarSeccion('resena', this)">Reseña Histórica</button>
-            <button class="nav-btn" onclick="mostrarSeccion('horarios', this)">Horarios</button>
-            <button class="nav-btn" onclick="mostrarSeccion('ubicacion', this)">Ubicación</button>
-            <button class="nav-btn" onclick="mostrarSeccion('carrito', this)">🛒 Carrito <span id="contadorCarrito" class="badge-carrito">0</span></button>
-            <button class="nav-btn" onclick="mostrarSeccion('login', this)">Iniciar Sesión</button>
-        </nav>
+        <div class="menu-wrapper">
+            <button class="btn-hamburguesa" onclick="toggleMenuMenu()" aria-label="Abrir menú">☰ Menú</button>
+            <nav class="nav-botones" id="menuNavegacion">
+                <button class="nav-btn active" onclick="mostrarSeccion('inicio', this)">Inicio</button>
+                <button class="nav-btn" onclick="mostrarSeccion('resena', this)">Reseña Histórica</button>
+                <button class="nav-btn" onclick="mostrarSeccion('horarios', this)">Horarios</button>
+                <button class="nav-btn" onclick="mostrarSeccion('ubicacion', this)">Ubicación</button>
+                <button class="nav-btn" onclick="mostrarSeccion('carrito', this)">🛒 Carrito <span id="contadorCarrito" class="badge-carrito">0</span></button>
+                <button class="nav-btn" onclick="mostrarSeccion('login', this)">Iniciar Sesión</button>
+            </nav>
+        </div>
     </header>
 
     <header id="header-principal">
@@ -348,7 +360,7 @@
                 <h3>Reseña Histórica</h3>
                 <p>A finales del año 2016, motivado por el incremento en las ventas de medicina natural mientras laboraba en una farmacia, el señor Jairo Molina concibió la idea de crear una tienda dedicada a la comercialización de productos naturales. Esta iniciativa se concretó el 1 de febrero de 2017 con la apertura oficial del Centro Naturista Donde Jairo, estableciendo su primera ubicación en los locales 05 y 06 del Centro Comercial Mari, ubicado en la Avenida 13 (conocida como la Calle Colombia).</p>
                 <p>Con el propósito de profundizar en el área del bienestar integral, el señor Molina emprendió estudios en medicina natural, graduándose como naturólogo en diciembre de 2018. Gracias a esta preparación académica y al crecimiento de la empresa, en enero de 2019 el establecimiento fue trasladado al Centro Comercial La Miniatura, disponiendo de un local más amplio y cómodo para la atención del público.</p>
-                <p>Posteriormente, a raíz de los desafíos derivados de la pandemia de 2020 y el incremento en los costos de alquiler, la tienda reubicó sus instalaciones en el local 01 del Centro Comercial Sor Inés. A lo largo de su trayectoria, el Centro Naturista Donde Jairo ha mantenido una evolución constante orientada a mejorar el servicio al cliente, ofreciendo un amplio catálogo de productos naturales y artesanales elaborados bajo rigurosos estándares de calidad y respaldados por laboratorios de reconocida excelencia, consolidándose en la actualidad como el establecimiento con el mejor surtido en la ciudad de Rubio.</p>
+                <p>Posteriormente, a raíz de los desafíos derivados de la pandemia de 2020 y el incremento en los costos de alquiler, la tienda reubicó sus instalaciones en el local 01 del Centro Comercial Sor Insés. A lo largo de su trayectoria, el Centro Naturista Donde Jairo ha mantenido una evolución constante orientada a mejorar el servicio al cliente, ofreciendo un amplio catálogo de productos naturales y artesanales elaborados bajo rigurosos estándares de calidad y respaldados por laboratorios de reconocida excelencia, consolidándose en la actualidad como el establecimiento con el mejor surtido en la ciudad de Rubio.</p>
             </div>
         </section>
 
@@ -517,7 +529,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderizarGrillaCatálogos();
-            // Cerrar menú al hacer clic fuera
             document.addEventListener('click', (e) => {
                 const nav = document.getElementById('menuNavegacion');
                 const btn = document.querySelector('.btn-hamburguesa');
@@ -527,7 +538,6 @@
             });
         });
 
-        // Alternar Menú Hamburguesa en cualquier dispositivo (PC y Móvil)
         function toggleMenuMenu() {
             const menu = document.getElementById('menuNavegacion');
             menu.classList.toggle('desplegado');
@@ -540,7 +550,6 @@
             document.getElementById('vista-' + idSeccion).classList.add('activa');
             botonSeleccionado.classList.add('active');
 
-            // Cerrar el menú desplegable tras seleccionar una opción
             document.getElementById('menuNavegacion').classList.remove('desplegado');
 
             const headerPrincipal = document.getElementById('header-principal');
@@ -881,7 +890,7 @@
             let nombreCliente = prompt("Por favor, ingresa tu nombre para personalizar tu consulta:");
             let saludo = "Hola, vengo de su Catálogo Digital.";
             
-            if (nombreCliente && nombreCliente.trim() !== "") {
+            if (nombreChild && nombreCliente.trim() !== "") {
                 saludo = `Hola, mi nombre es *${nombreCliente.trim()}*. Vengo de su Catálogo Digital y...`;
             }
 
