@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,10 +48,11 @@
             gap: 20px;
         }
 
+        /* BARRA SUPERIOR Y MENÚ DESPLEGABLE UNIVERSAL (PC Y MÓVIL) */
         .barra-navegacion-superior {
-            background-color: #ffffff;
-            border-bottom: 2px solid #e2e8f0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background-color: var(--color-primario);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             padding: 12px 30px;
             display: flex;
             justify-content: space-between;
@@ -62,29 +62,71 @@
             z-index: 1000;
         }
 
-        /* Título superior corregido para que contraste y resalte perfectamente sobre el fondo blanco */
         .barra-navegacion-superior h2 { 
             font-size: 1.05rem; 
-            color: #081a2b; 
+            color: #ffffff; 
             font-weight: 900; 
             letter-spacing: 0.3px;
         }
 
-        .nav-botones { display: flex; gap: 12px; align-items: center; }
+        .btn-hamburguesa {
+            display: block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .btn-hamburguesa:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-botones {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            width: 260px;
+            background-color: var(--color-primario);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 2px solid var(--color-secundario);
+            border-radius: 0 0 12px 12px;
+            padding: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            gap: 10px;
+            z-index: 1100;
+        }
+        .nav-botones.desplegado { display: flex; }
 
         .nav-btn {
             text-decoration: none;
-            color: #1e293b;
+            color: #ffffff;
             font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 16px;
+            border-radius: 8px;
             font-size: 0.95rem;
-            background-color: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.2s ease;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
         }
-        .nav-btn:hover { background-color: #ffffff; color: var(--color-primario); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .nav-btn.active { background-color: var(--color-primario); color: white; border-color: transparent; }
+        .nav-btn:hover { background-color: rgba(255, 255, 255, 0.25); color: #ffffff; }
+        .nav-btn.active { background-color: var(--color-secundario); color: white; border-color: transparent; }
+
+        .badge-carrito {
+            background-color: #e11d48;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
 
         .logo-centro {
             width: 105px; height: 105px; object-fit: cover;
@@ -103,11 +145,78 @@
 
         .info-card {
             background-color: white; border: 1px solid #cbd5e1;
-            border-radius: var(--radio); padding: 25px 30px;
+            border-radius: var(--radio); padding: 30px;
             margin-bottom: 35px; box-shadow: var(--sombra-suave);
         }
         .info-card h3 { color: var(--color-primario); margin-bottom: 12px; font-size: 1.4rem; }
-        .info-card p { font-size: 1.05rem; margin-bottom: 8px; }
+        .info-card p { font-size: 1.05rem; margin-bottom: 12px; }
+
+        /* Módulo de Autenticación y Administración */
+        .auth-container {
+            max-width: 900px; margin: 20px auto; background: white;
+            padding: 40px; border-radius: var(--radio); box-shadow: var(--sombra-suave); border: 1px solid #cbd5e1;
+        }
+        .auth-container h3 { color: var(--color-primario); margin-bottom: 20px; text-align: center; font-size: 1.6rem; }
+        
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-weight: 600; color: var(--color-primario); font-size: 0.95rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; outline: none; transition: 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+            border-color: var(--color-secundario); box-shadow: 0 0 0 3px rgba(91, 150, 36, 0.15); 
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, var(--color-primario) 0%, #1b4772 100%);
+            color: white; border: none; padding: 14px; border-radius: 10px;
+            font-weight: 600; cursor: pointer; text-align: center; width: 100%; font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(15, 45, 74, 0.2); transition: 0.3s;
+        }
+        .btn-login:hover { background: linear-gradient(135deg, #1b4772 0%, var(--color-primario) 100%); }
+
+        .auth-alert { padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9rem; text-align: center; display: none; }
+        .auth-alert.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .auth-alert.success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+        .panel-admin-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px;
+        }
+        .grid-formulario-admin { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+
+        .tabla-gestion-admin { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 0.95rem; }
+        .tabla-gestion-admin th, .tabla-gestion-admin td { padding: 12px; border: 1px solid #e2e8f0; text-align: left; }
+        .tabla-gestion-admin th { background-color: #f8fafc; color: var(--color-primario); }
+        .tabla-gestion-admin input[type="number"] { width: 80px; padding: 6px; border-radius: 6px; border: 1px solid #cbd5e1; }
+
+        .btn-accion-admin { padding: 6px 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-eliminar { background-color: #ef4444; color: white; }
+        .btn-eliminar:hover { background-color: #dc2626; }
+
+        /* Carrito de Compras */
+        .carrito-container {
+            max-width: 850px; margin: 0 auto; background: white;
+            border-radius: var(--radio); padding: 30px; border: 1px solid #cbd5e1; box-shadow: var(--sombra-suave);
+        }
+        .carrito-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 2px solid #f1f5f9; margin-bottom: 20px; }
+        .carrito-item { display: flex; align-items: center; gap: 15px; padding: 16px 0; border-bottom: 1px solid #f1f5f9; }
+        .checkbox-shein { width: 22px; height: 22px; accent-color: var(--color-secundario); cursor: pointer; }
+        .carrito-item-img { width: 70px; height: 70px; object-fit: cover; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .carrito-item-detalles { flex-grow: 1; }
+        .carrito-item-detalles h4 { color: var(--color-primario); font-size: 1.05rem; }
+        .carrito-item-detalles p { color: var(--color-secundario); font-weight: 700; font-size: 0.95rem; }
+        .controles-cantidad { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .btn-qty { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold; color: var(--color-primario); }
+        .btn-qty:hover { background: #f1f5f9; }
+        .btn-eliminar-item { color: #ef4444; background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 5px; transition: 0.2s; }
+        .btn-eliminar-item:hover { transform: scale(1.15); }
+        .resumen-compra-shein {
+            margin-top: 30px; background: #f8fafc; padding: 20px; border-radius: 12px;
+            border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .total-texto { font-size: 1.2rem; color: var(--color-primario); }
+        .total-monto { color: var(--color-secundario); font-weight: 800; font-size: 1.4rem; }
 
         .map-link {
             display: inline-block; margin-top: 15px; padding: 12px 22px;
@@ -118,17 +227,13 @@
         .map-link:hover { background: linear-gradient(135deg, #1b4772 0%, var(--color-primario) 100%); }
 
         .controles-navegacion { max-width: 800px; margin: 0 auto 50px; display: flex; flex-direction: column; gap: 20px; }
-        .contenedor-busqueda {
-            box-shadow: var(--sombra-suave); border-radius: 50px;
-            overflow: hidden; border: 1px solid #cbd5e1; background-color: white;
-        }
+        .contenedor-busqueda { box-shadow: var(--sombra-suave); border-radius: 50px; overflow: hidden; border: 1px solid #cbd5e1; background-color: white; }
         .contenedor-busqueda input { width: 100%; padding: 16px 28px; border: none; outline: none; font-size: 1.05rem; background: transparent; }
 
         .filtros-categorias { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .btn-filtro {
             background-color: white; color: var(--color-primario); border: 1px solid #cbd5e1;
-            padding: 10px 22px; border-radius: 30px; font-size: 0.95rem; font-weight: 600;
-            cursor: pointer; box-shadow: var(--sombra-suave); transition: 0.25s;
+            padding: 10px 22px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; cursor: pointer; box-shadow: var(--sombra-suave); transition: 0.25s;
         }
         .btn-filtro:hover { border-color: var(--color-secundario); color: var(--color-secundario); }
         .btn-filtro.activo { background: linear-gradient(135deg, var(--color-secundario) 0%, #4a7d1b 100%); color: white; border-color: var(--color-secundario); }
@@ -164,6 +269,14 @@
         .datos-consulta strong { color: var(--color-primario); }
         .precio-tag { color: var(--color-secundario) !important; font-weight: 700 !important; font-size: 1.1rem; }
 
+        .grupo-botones-tarjeta { display: flex; gap: 10px; }
+
+        .btn-add-carrito {
+            background-color: white; color: var(--color-primario); border: 2px solid var(--color-primario);
+            padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+        }
+        .btn-add-carrito:hover { background-color: var(--color-primario); color: white; }
+
         .btn-consultar {
             background: linear-gradient(135deg, var(--color-primario) 0%, #1b4772 100%);
             color: white; border: none; padding: 14px; border-radius: 12px;
@@ -171,6 +284,9 @@
             box-shadow: 0 4px 12px rgba(15, 45, 74, 0.2); transition: 0.3s;
         }
         .btn-consultar:hover { background: linear-gradient(135deg, #1b4772 0%, var(--color-primario) 100%); }
+
+        .seccion-vista { display: none; }
+        .seccion-vista.activa { display: block; }
 
         footer {
             background: linear-gradient(135deg, var(--color-primario) 0%, #081a2b 100%);
@@ -186,15 +302,18 @@
 
     <header class="barra-navegacion-superior">
         <h2>CENTRO NATURISTA DONDE JAIRO</h2>
-        <nav class="nav-botones">
-            <a href="#inicio" class="nav-btn active">Inicio</a>
-            <a href="#horarios" class="nav-btn">Horarios</a>
-            <a href="#ubicacion" class="nav-btn">Ubicación</a>
-            <a href="#resena" class="nav-btn">Reseña Histórica</a>
+        <button class="btn-hamburguesa" onclick="toggleMenuMenu()" aria-label="Abrir menú">☰ Menú</button>
+        <nav class="nav-botones" id="menuNavegacion">
+            <button class="nav-btn active" onclick="mostrarSeccion('inicio', this)">Inicio</button>
+            <button class="nav-btn" onclick="mostrarSeccion('resena', this)">Reseña Histórica</button>
+            <button class="nav-btn" onclick="mostrarSeccion('horarios', this)">Horarios</button>
+            <button class="nav-btn" onclick="mostrarSeccion('ubicacion', this)">Ubicación</button>
+            <button class="nav-btn" onclick="mostrarSeccion('carrito', this)">🛒 Carrito <span id="contadorCarrito" class="badge-carrito">0</span></button>
+            <button class="nav-btn" onclick="mostrarSeccion('login', this)">Iniciar Sesión</button>
         </nav>
     </header>
 
-    <header id="inicio">
+    <header id="header-principal">
         <div class="contenedor-header">
             <img class="logo-centro" src="logo.jpg" alt="Logo Centro Naturista" onerror="this.style.display='none';">
             <div>
@@ -206,14 +325,16 @@
 
     <main class="contenedor-principal">
         
-        <section id="horarios">
+        <!-- VISTA DE HORARIOS -->
+        <section id="vista-horarios" class="seccion-vista">
             <div class="info-card">
                 <h3>Horarios de Atención</h3>
                 <p><strong>De lunes a sábado:</strong> De 8:30 am a 12:00 pm y de 1:00 pm a 6:00 pm.</p>
             </div>
         </section>
 
-        <section id="ubicacion">
+        <!-- VISTA DE UBICACIÓN -->
+        <section id="vista-ubicacion" class="seccion-vista">
             <div class="info-card">
                 <h3>Ubicación</h3>
                 <p>Avenida 11 entre calle 12 - 13 , Centro Comercial Sor Ines , local #01 . Centro de Rubio - Táchira.</p>
@@ -221,275 +342,144 @@
             </div>
         </section>
 
-        <section id="resena">
+        <!-- VISTA DE RESEÑA HISTÓRICA -->
+        <section id="vista-resena" class="seccion-vista">
             <div class="info-card">
                 <h3>Reseña Histórica</h3>
-                <p><em>Próximamente disponible...</em></p>
+                <p>A finales del año 2016, motivado por el incremento en las ventas de medicina natural mientras laboraba en una farmacia, el señor Jairo Molina concibió la idea de crear una tienda dedicada a la comercialización de productos naturales. Esta iniciativa se concretó el 1 de febrero de 2017 con la apertura oficial del Centro Naturista Donde Jairo, estableciendo su primera ubicación en los locales 05 y 06 del Centro Comercial Mari, ubicado en la Avenida 13 (conocida como la Calle Colombia).</p>
+                <p>Con el propósito de profundizar en el área del bienestar integral, el señor Molina emprendió estudios en medicina natural, graduándose como naturólogo en diciembre de 2018. Gracias a esta preparación académica y al crecimiento de la empresa, en enero de 2019 el establecimiento fue trasladado al Centro Comercial La Miniatura, disponiendo de un local más amplio y cómodo para la atención del público.</p>
+                <p>Posteriormente, a raíz de los desafíos derivados de la pandemia de 2020 y el incremento en los costos de alquiler, la tienda reubicó sus instalaciones en el local 01 del Centro Comercial Sor Inés. A lo largo de su trayectoria, el Centro Naturista Donde Jairo ha mantenido una evolución constante orientada a mejorar el servicio al cliente, ofreciendo un amplio catálogo de productos naturales y artesanales elaborados bajo rigurosos estándares de calidad y respaldados por laboratorios de reconocida excelencia, consolidándose en la actualidad como el establecimiento con el mejor surtido en la ciudad de Rubio.</p>
             </div>
         </section>
 
-        <div class="controles-navegacion">
-            <div class="contenedor-busqueda">
-                <input type="text" id="buscador" placeholder="Buscar un producto..." aria-label="Buscar producto">
-            </div>
-            
-            <div class="filtros-categorias">
-                <button class="btn-filtro activo" onclick="filtrarCategoria('todos', this)">Todos</button>
-                <button class="btn-filtro" onclick="filtrarCategoria('suplementos', this)">Suplementos y Vitaminas</button>
-                <button class="btn-filtro" onclick="filtrarCategoria('deportiva', this)">Línea Deportiva</button>
-                <button class="btn-filtro" onclick="filtrarCategoria('tes', this)">Tés e Infusiones</button>
-                <button class="btn-filtro" onclick="filtrarCategoria('bienestar', this)">Cuidado Digestivo y Bienestar</button>
-            </div>
-        </div>
+        <!-- VISTA DEL CARRITO DE COMPRAS -->
+        <section id="vista-carrito" class="seccion-vista">
+            <div class="carrito-container">
+                <div class="carrito-header">
+                    <h3>Tu Carrito de Compras</h3>
+                    <button class="btn-filtro" onclick="seleccionarTodos(true)">Seleccionar Todo</button>
+                </div>
+                
+                <div id="listaCarritoItems"></div>
 
-        <div class="grilla-productos" id="grilla">
-            <div id="sinResultados" class="sin-resultados">
-                No encontramos productos en esta categoría que coincidan con tu búsqueda.
-            </div>
-
-            <!-- SUPLEMENTOS -->
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="prostaplant 500 mg cuidado de la próstata">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="prostaplant.jpg" alt="Prostaplant" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Prostaplant 500 mg</h3>
-                    <p class="descripcion">Formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un desinflamatorio natural de la próstata.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
+                <div class="resumen-compra-shein">
+                    <div>
+                        <div class="total-texto">Total seleccionado (<span id="cantSeleccionada">0</span> productos):</div>
+                        <div class="total-monto" id="montoTotalCarrito">$0.00</div>
                     </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Prostaplant 500 mg', 'Frasco de 60 Cápsulas', '19$')">Consultar Producto</button>
+                    <button class="btn-login" style="max-width: 280px;" onclick="enviarPedidoWhatsApp()">Pedir por WhatsApp</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA DE AUTENTICACIÓN / INICIO DE SESIÓN Y GESTIÓN -->
+        <section id="vista-login" class="seccion-vista">
+            <div class="auth-container">
+                
+                <div id="alertaAuth" class="auth-alert"></div>
+
+                <!-- Formulario de Login -->
+                <div id="formLoginDiv" style="max-width: 400px; margin: 0 auto;">
+                    <h3>Acceso Administrativo</h3>
+                    <div class="form-group">
+                        <label for="usuarioInput">Usuario</label>
+                        <input type="text" id="usuarioInput" placeholder="Ingrese su usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Contraseña</label>
+                        <input type="password" id="passwordInput" placeholder="Ingrese su contraseña">
+                    </div>
+                    <button class="btn-login" onclick="intentarLogin()">Ingresar al Sistema</button>
+                </div>
+
+                <!-- Panel de Gestión de Productos -->
+                <div id="panelAdminDiv" style="display: none;">
+                    <div class="panel-admin-header">
+                        <h3>Panel de Administración del Inventario</h3>
+                        <button class="btn-login" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); width: auto; padding: 8px 18px;" onclick="cerrarSesion()">Cerrar Sesión</button>
+                    </div>
+
+                    <!-- Formulario para Agregar Producto Nuevo -->
+                    <div style="background-color: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 30px;">
+                        <h4 style="color: var(--color-primario); margin-bottom: 15px;">Agregar Nuevo Producto</h4>
+                        <div class="grid-formulario-admin">
+                            <div class="form-group">
+                                <label>Nombre del Producto</label>
+                                <input type="text" id="nuevoNombre" placeholder="Ej: Magnesio Citrato">
+                            </div>
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                <select id="nuevaCategoria">
+                                    <option value="suplementos">Suplementos y Vitaminas</option>
+                                    <option value="deportiva">Línea Deportiva</option>
+                                    <option value="tes">Tés e Infusiones</option>
+                                    <option value="bienestar">Cuidado Digestivo y Bienestar</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Precio ($ USD)</label>
+                                <input type="number" id="nuevoPrecio" placeholder="15">
+                            </div>
+                            <div class="form-group">
+                                <label>Presentación</label>
+                                <input type="text" id="nuevaPresentacion" placeholder="Ej: 60 Cápsulas">
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre o Ruta Imagen</label>
+                                <input type="text" id="nuevaImagen" placeholder="ejemplo.jpg">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>Descripción del Producto</label>
+                            <textarea id="nuevaDescripcion" rows="2" placeholder="Breve descripción..."></textarea>
+                        </div>
+                        <button class="btn-login" style="background: linear-gradient(135deg, var(--color-secundario) 0%, #4a7d1b 100%); margin-top: 10px;" onclick="agregarNuevoProductoAdmin()">Añadir Producto al Catálogo</button>
+                    </div>
+
+                    <!-- Tabla de Edición y Eliminación de Productos -->
+                    <h4 style="color: var(--color-primario); margin-bottom: 15px;">Gestión de Productos Existentes</h4>
+                    <div style="overflow-x: auto;">
+                        <table class="tabla-gestion-admin">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Presentación</th>
+                                    <th>Precio ($)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoTablaAdmin"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VISTA DE INICIO / CATÁLOGO -->
+        <section id="vista-inicio" class="seccion-vista activa">
+            <div class="controles-navegacion">
+                <div class="contenedor-busqueda">
+                    <input type="text" id="buscador" placeholder="Buscar un producto..." aria-label="Buscar producto">
+                </div>
+                
+                <div class="filtros-categorias">
+                    <button class="btn-filtro activo" onclick="filtrarCategoria('todos', this)">Todos</button>
+                    <button class="btn-filtro" onclick="filtrarCategoria('suplementos', this)">Suplementos y Vitaminas</button>
+                    <button class="btn-filtro" onclick="filtrarCategoria('deportiva', this)">Línea Deportiva</button>
+                    <button class="btn-filtro" onclick="filtrarCategoria('tes', this)">Tés e Infusiones</button>
+                    <button class="btn-filtro" onclick="filtrarCategoria('bienestar', this)">Cuidado Digestivo y Bienestar</button>
                 </div>
             </div>
 
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="muxer 500 mg climaterio y menopausia">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="muxer.jpg" alt="Muxer" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Muxer 500 mg</h3>
-                    <p class="descripcion">Soporte natural especialmente desarrollado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece regulación hormonal.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">16$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Muxer 500 mg', 'Frasco de 60 Cápsulas', '16$')">Consultar Producto</button>
+            <div class="grilla-productos" id="grilla">
+                <div id="sinResultados" class="sin-resultados">
+                    No encontramos productos en esta categoría que coincidan con tu búsqueda.
                 </div>
             </div>
+        </section>
 
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="magnetrol x5 5 tipos de magnesios">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="magnetrol.jpg" alt="Magnetrol X5" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Magnetrol X5</h3>
-                    <p class="descripcion">Fórmula avanzada con 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato). Logra un 98% de absorción ideal para el sistema nervioso.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas Veganas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Magnetrol X5', 'Frasco de 60 Cápsulas Veganas', '19$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin d3 5000 iu vitamina d3">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="vitaminad3.jpg" alt="Vitamin D3" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Vitamin D3 5000 IU</h3>
-                    <p class="descripcion">Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Promueve la fijación de calcio en los huesos y fortalece el sistema inmunológico.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">22$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin D3 5000 IU', 'Frasco de 100 Cápsulas', '22$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="selenium 200 mcg selenio">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="selenio.jpg" alt="Selenium" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Selenium 200 mcg</h3>
-                    <p class="descripcion">Mineral esencial puro diseñado para el soporte del bienestar celular. Juega un papel fundamental en la protección contra el daño y el estrés oxidativo.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">20$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Selenium 200 mcg', 'Frasco de 100 Cápsulas', '20$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin e 1000 iu vitamina e">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="vitaminae.jpg" alt="Vitamin E" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Vitamin E 1000 IU</h3>
-                    <p class="descripcion">Diseñado para promover una salud cardiovascular óptima y el cuidado profundo de los tejidos de la piel. Mantiene el sistema inmune fuerte.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 50 Cápsulas Blandas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">16$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin E 1000 IU', 'Frasco de 50 Cápsulas Blandas', '16$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="vitamin c 1000mg vitamina c">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="vitaminac.jpg" alt="Vitamin C" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Vitamin C 1000mg</h3>
-                    <p class="descripcion">Poderoso antioxidante a base de ácido ascórbico puro. Ayuda a prevenir afecciones respiratorias cotidianas y promueve la producción activa de colágeno.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Tabletas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">15$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Vitamin C 1000mg', 'Frasco de 60 Tabletas', '15$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="omega-3 fish oil omega 3 aceite de pescado">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="omega3.jpg" alt="Omega-3" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Omega-3 Fish Oil</h3>
-                    <p class="descripcion">Aceite de pescado premium de alta calidad. Apoya el sistema cardiovascular, asiste en reducir la inflamación celular y mejora el rendimiento cerebral.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas Blandas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">20$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Omega-3 Fish Oil', 'Frasco de 60 Cápsulas Blandas (2000 mg)', '20$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="suplementos" data-nombre="multi men formula multivitaminico hombres">
-                <div class="imagen-producto"><span class="tag-categoria">Suplementos</span><img src="multimen.jpg" alt="Multi MEN" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Multi MEN Formula</h3>
-                    <p class="descripcion">Complejo vitamínico integral formulado para las demandas diarias del hombre. Reduce la fatiga y aporta antioxidantes claves como el licopeno.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 100 Tabletas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">25$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Multi MEN Formula', 'Frasco de 100 Tabletas', '25$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <!-- LÍNEA DEPORTIVA -->
-            <div class="tarjeta-producto" data-categoria="deportiva" data-nombre="maximum creatine creatina rendimiento muscular">
-                <div class="imagen-producto"><span class="tag-categoria">Deportiva</span><img src="creatina.jpg" alt="Creatine" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Maximum Creatine</h3>
-                    <p class="descripcion">Diseñado para potenciar la fuerza y el desarrollo muscular. Optimiza el rendimiento físico en entrenamientos exigentes de alta intensidad.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 100 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">19$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum Creatine', 'Frasco de 100 Cápsulas (1200 mg)', '19$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="deportiva" data-nombre="maximum l-carnitine l-carnitina carnitina energia">
-                <div class="imagen-producto"><span class="tag-categoria">Deportiva</span><img src="lcarnitina.jpg" alt="L-Carnitine" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Maximum L-Carnitine</h3>
-                    <p class="descripcion">Suplemento aminoácido ideal para la conversión de ácidos grasos en energía limpia. Apoya el rendimiento y el mantenimiento de masa magra.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">22$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Maximum L-Carnitine', 'Frasco de 60 Cápsulas (800 mg)', '22$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <!-- TÉS E INFUSIONES -->
-            <div class="tarjeta-producto" data-categoria="tes" data-nombre="té verde 500 mg control de peso antioxidante">
-                <div class="imagen-producto"><span class="tag-categoria">Tés e Infusiones</span><img src="teverde.jpg" alt="Té Verde" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Té Verde 500 mg</h3>
-                    <p class="descripcion">Poderoso antioxidante botánico concentrado. Estimula suavemente el metabolismo celular, apoyando los procesos de pérdida de peso saludable.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">10$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Té Verde 500 mg', 'Frasco de 60 Cápsulas', '10$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <!-- BIENESTAR -->
-            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="sábila aloe vera 500 mg digestion estomago">
-                <div class="imagen-producto"><span class="tag-categoria">Bienestar</span><img src="sabila.jpg" alt="Sábila" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Sábila (Aloe Vera) 500 mg</h3>
-                    <p class="descripcion">Extracto puro ideal para regular el tránsito intestinal suavemente. Promueve el alivio de la pesadez y actúa protegiendo la mucosa gástrica.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 10 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">8$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Sábila (Aloe Vera) 500 mg', 'Frasco de 10 Cápsulas', '8$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="probiotics premium probioticos flora intestinal">
-                <div class="imagen-producto"><span class="tag-categoria">Bienestar</span><img src="probioticos.jpg" alt="Probiotics" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Probiotics Premium</h3>
-                    <p class="descripcion">Suplemento de alta potencia con 25 Billion CFU. Diseñado para repoblar de forma saludable y equilibrar la flora bacteriana del sistema digestivo.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">18$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Probiotics Premium', 'Frasco de 60 Cápsulas (25 Billion CFU)', '18$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="glucosamine chondroitin glucosamina articulaciones colageno">
-                <div class="imagen-producto"><span class="tag-categoria">Bienestar</span><img src="glucosamina.jpg" alt="Glucosamine" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Glucosamine Chondroitin</h3>
-                    <p class="descripcion">Fórmula con Ácido Hialurónico, Colágeno y MSM. Ayuda al mantenimiento y flexibilidad de las articulaciones frente al desgaste cotidiano.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 90 Cápsulas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">18$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Glucosamine Chondroitin', 'Frasco de 90 Cápsulas (2865 mg)', '18$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="miel de abeja fecoapi pura energia natural">
-                <div class="imagen-producto"><span class="tag-categoria">Bienestar</span><img src="miel.jpg" alt="Miel" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Miel de Abeja FECOAPI</h3>
-                    <p class="descripcion">Miel artesanal 100% pura. Excelente endulzante biológico que aporta energía natural, apoya la digestión y calma molestias de garganta.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 500g</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">7$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Miel de Abeja FECOAPI 500g', 'Frasco de 500g', '7$')">Consultar Producto</button>
-                </div>
-            </div>
-
-            <div class="tarjeta-producto" data-categoria="bienestar" data-nombre="colágeno hidrolizado vitamina c gomitas huesos articulaciones">
-                <div class="imagen-producto"><span class="tag-categoria">Bienestar</span><img src="colageno.jpg" alt="Colágeno" loading="lazy"></div>
-                <div class="info-producto">
-                    <h3>Colágeno + Vitamina C</h3>
-                    <p class="descripcion">Gomitas funcionales masticables sabor parchita. Apoyan la densidad mineral ósea y asisten en la protección del cartílago articular.</p>
-                    <div class="datos-consulta">
-                        <span><strong>Presentación:</strong> 60 Gomitas</span>
-                        <span><strong>Disponibilidad:</strong> En Stock</span>
-                        <span><strong>Precio:</strong> <span class="precio-tag">12$</span></span>
-                    </div>
-                    <button class="btn-consultar" onclick="enviarWhatsApp('Colágeno Hidrolizado + Vitamina C (Gomitas)', 'Frasco de 60 Gomitas (Sabor Parchita)', '12$')">Consultar Producto</button>
-                </div>
-            </div>
-
-        </div>
     </main>
 
     <footer>
@@ -499,7 +489,362 @@
     </footer>
 
     <script>
+        const USUARIO_ADMIN_CORRECTO = "gabriel"; 
+        const PASSWORD_ADMIN_CORRECTA = "32521077"; 
+
+        let productos = [
+            { id: 1, nombre: "Prostaplant 500 mg", categoria: "suplementos", palabrasClave: "prostaplant 500 mg cuidado de la próstata", precio: 19, presentacion: "60 Cápsulas", descripcion: "Formulado específicamente para la protección y el correcto funcionamiento del sistema reproductor masculino. Actúa como un desinflamatorio natural de la próstata.", imagen: "prostaplant.jpg" },
+            { id: 2, nombre: "Muxer 500 mg", categoria: "suplementos", palabrasClave: "muxer 500 mg climaterio y menopausia", precio: 16, presentacion: "60 Cápsulas", descripcion: "Soporte natural especialmente desarrollado para el bienestar integral de la mujer durante las etapas del climaterio y la menopausia. Ofrece regulación hormonal.", imagen: "muxer.jpg" },
+            { id: 3, nombre: "Magnetrol X5", categoria: "suplementos", palabrasClave: "magnetrol x5 5 tipos de magnesios", precio: 19, presentacion: "60 Cápsulas Veganas", descripcion: "Fórmula avanzada con 5 fuentes esenciales de magnesio (Citrato, Malato, Taurinato, Bisglicinato y Treonato). Logra un 98% de absorción ideal para el sistema nervioso.", imagen: "magnetrol.jpg" },
+            { id: 4, nombre: "Vitamin D3 5000 IU", categoria: "suplementos", palabrasClave: "vitamin d3 5000 iu vitamina d3", precio: 22, presentacion: "100 Cápsulas", descripcion: "Suplemento de alta potencia esencial para el óptimo equilibrio orgánico. Promueve la fijación de calcio en los huesos y fortalece el sistema inmunológico.", imagen: "vitaminad3.jpg" },
+            { id: 5, nombre: "Selenium 200 mcg", categoria: "suplementos", palabrasClave: "selenium 200 mcg selenio", precio: 20, presentacion: "100 Cápsulas", descripcion: "Mineral esencial puro diseñado para el soporte del bienestar celular. Juega un papel fundamental en la protección contra el daño y el estrés oxidativo.", imagen: "selenio.jpg" },
+            { id: 6, nombre: "Vitamin E 1000 IU", categoria: "suplementos", palabrasClave: "vitamin e 1000 iu vitamina e", precio: 16, presentacion: "50 Cápsulas Blandas", descripcion: "Diseñado para promover una salud cardiovascular óptima y el cuidado profundo de los tejidos de la piel. Mantiene el sistema inmune fuerte.", imagen: "vitaminae.jpg" },
+            { id: 7, nombre: "Vitamin C 1000mg", categoria: "suplementos", palabrasClave: "vitamin c 1000mg vitamina c", precio: 15, presentacion: "60 Tabletas", descripcion: "Poderoso antioxidante a base de ácido ascórbico puro. Ayuda a prevenir afecciones respiratorias cotidianas y promueve la producción activa de colágeno.", imagen: "vitaminac.jpg" },
+            { id: 8, nombre: "Omega-3 Fish Oil", categoria: "suplementos", palabrasClave: "omega-3 fish oil omega 3 aceite de pescado", precio: 20, presentacion: "60 Cápsulas Blandas", descripcion: "Aceite de pescado premium de alta calidad. Apoya el sistema cardiovascular, asiste en reducir la inflamación celular y mejora el rendimiento cerebral.", imagen: "omega3.jpg" },
+            { id: 9, nombre: "Multi MEN Formula", categoria: "suplementos", palabrasClave: "multi men formula multivitaminico hombres", precio: 25, presentacion: "100 Tabletas", descripcion: "Complejo vitamínico integral formulado para las demandas diarias del hombre. Reduce la fatiga y aporta antioxidantes claves como el licopeno.", imagen: "multimen.jpg" },
+            { id: 10, nombre: "Maximum Creatine", categoria: "deportiva", palabrasClave: "maximum creatine creatina rendimiento muscular", precio: 19, presentacion: "100 Cápsulas", descripcion: "Diseñado para potenciar la fuerza y el desarrollo muscular. Optimiza el rendimiento físico en entrenamientos exigentes de alta intensidad.", imagen: "creatina.jpg" },
+            { id: 11, nombre: "Maximum L-Carnitine", categoria: "deportiva", palabrasClave: "maximum l-carnitine l-carnitina carnitina energia", precio: 22, presentacion: "60 Cápsulas", descripcion: "Suplemento aminoácido ideal para la conversión de ácidos grasos en energía limpia. Apoya el rendimiento y el mantenimiento de masa magra.", imagen: "lcarnitina.jpg" },
+            { id: 12, nombre: "Té Verde 500 mg", categoria: "tes", palabrasClave: "té verde 500 mg control de peso antioxidante", precio: 10, presentacion: "60 Cápsulas", descripcion: "Poderoso antioxidante botánico concentrado. Estimula suavemente el metabolismo celular, apoyando los procesos de pérdida de peso saludable.", imagen: "teverde.jpg" },
+            { id: 13, nombre: "Sábila (Aloe Vera) 500 mg", categoria: "bienestar", palabrasClave: "sábila aloe vera 500 mg digestion estomago", precio: 8, presentacion: "10 Cápsulas", descripcion: "Extracto puro ideal para regular el tránsito intestinal suavemente. Promueve el alivio de la pesadez y actúa protegiendo la mucosa gástrica.", imagen: "sabila.jpg" },
+            { id: 14, nombre: "Probiotics Premium", categoria: "bienestar", palabrasClave: "probiotics premium probioticos flora intestinal", precio: 18, presentacion: "60 Cápsulas", descripcion: "Suplemento de alta potencia con 25 Billion CFU. Diseñado para repoblar de forma saludable y equilibrar la flora bacteriana del sistema digestivo.", imagen: "probioticos.jpg" },
+            { id: 15, nombre: "Glucosamine Chondroitin", categoria: "bienestar", palabrasClave: "glucosamine chondroitin glucosamina articulaciones colageno", precio: 18, presentacion: "90 Cápsulas", descripcion: "Fórmula con Ácido Hialurónico, Colágeno y MSM. Ayuda al mantenimiento y flexibilidad de las articulaciones frente al desgaste cotidiano.", imagen: "glucosamina.jpg" },
+            { id: 16, nombre: "Miel de Abeja FECOAPI", categoria: "bienestar", palabrasClave: "miel de abeja fecoapi pura energia natural", precio: 7, presentacion: "500g", descripcion: "Miel artesanal 100% pura. Excelente endulzante biológico que aporta energía natural, apoya la digestión y calma molestias de garganta.", imagen: "miel.jpg" },
+            { id: 17, nombre: "Colágeno + Vitamina C", categoria: "bienestar", palabrasClave: "colágeno hidrolizado vitamina c gomitas huesos articulaciones", precio: 12, presentacion: "60 Gomitas", descripcion: "Gomitas funcionales masticables sabor parchita. Apoyan la densidad mineral ósea y asisten en la protección del cartílago articular.", imagen: "colageno.jpg" }
+        ];
+
         let categoriaActual = 'todos';
+        let carrito = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarGrillaCatálogos();
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                const nav = document.getElementById('menuNavegacion');
+                const btn = document.querySelector('.btn-hamburguesa');
+                if (!nav.contains(e.target) && !btn.contains(e.target)) {
+                    nav.classList.remove('desplegado');
+                }
+            });
+        });
+
+        // Alternar Menú Hamburguesa en cualquier dispositivo (PC y Móvil)
+        function toggleMenuMenu() {
+            const menu = document.getElementById('menuNavegacion');
+            menu.classList.toggle('desplegado');
+        }
+
+        function mostrarSeccion(idSeccion, botonSeleccionado) {
+            document.querySelectorAll('.seccion-vista').forEach(sec => sec.classList.remove('activa'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('vista-' + idSeccion).classList.add('activa');
+            botonSeleccionado.classList.add('active');
+
+            // Cerrar el menú desplegable tras seleccionar una opción
+            document.getElementById('menuNavegacion').classList.remove('desplegado');
+
+            const headerPrincipal = document.getElementById('header-principal');
+            if (idSeccion === 'inicio') {
+                headerPrincipal.style.display = 'block';
+            } else {
+                headerPrincipal.style.display = 'none';
+            }
+
+            if (idSeccion === 'carrito') {
+                renderizarCarrito();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderizarGrillaCatálogos() {
+            const grilla = document.getElementById('grilla');
+            const avisoSinResultados = document.getElementById('sinResultados');
+            
+            grilla.innerHTML = '';
+            grilla.appendChild(avisoSinResultados);
+
+            productos.forEach(prod => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = 'tarjeta-producto';
+                tarjeta.setAttribute('data-categoria', prod.categoria);
+                tarjeta.setAttribute('data-nombre', (prod.palabrasClave || prod.nombre).toLowerCase());
+
+                const nombreCat = obtenerTextoCategoria(prod.categoria);
+
+                tarjeta.innerHTML = `
+                    <div class="imagen-producto">
+                        <span class="tag-categoria">${nombreCat}</span>
+                        <img src="${prod.imagen}" alt="${prod.nombre}" loading="lazy" onerror="this.src='logo.jpg'">
+                    </div>
+                    <div class="info-producto">
+                        <h3>${prod.nombre}</h3>
+                        <p class="descripcion">${prod.descripcion}</p>
+                        <div class="datos-consulta">
+                            <span><strong>Presentación:</strong> ${prod.presentacion}</span>
+                            <span><strong>Disponibilidad:</strong> En Stock</span>
+                            <span><strong>Precio:</strong> <span class="precio-tag">${prod.precio}$</span></span>
+                        </div>
+                        <div class="grupo-botones-tarjeta">
+                            <button class="btn-add-carrito" onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio}, '${prod.imagen}')" title="Agregar al carrito">🛒</button>
+                            <button class="btn-consultar" onclick="enviarWhatsApp('${prod.nombre}', '${prod.presentacion}', '${prod.precio}$')">Consultar Producto</button>
+                        </div>
+                    </div>
+                `;
+                grilla.appendChild(tarjeta);
+            });
+
+            aplicarFiltroCombinado();
+        }
+
+        function obtenerTextoCategoria(cat) {
+            switch(cat) {
+                case 'suplementos': return 'Suplementos';
+                case 'deportiva': return 'Deportiva';
+                case 'tes': return 'Tés e Infusiones';
+                case 'bienestar': return 'Bienestar';
+                default: return 'General';
+            }
+        }
+
+        function intentarLogin() {
+            const usuario = document.getElementById('usuarioInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+            const alerta = document.getElementById('alertaAuth');
+
+            alerta.style.display = 'none';
+            alerta.className = 'auth-alert';
+
+            if (usuario === "" || password === "") {
+                alerta.textContent = "Por favor, complete todos los campos obligatorios.";
+                alerta.classList.add('error');
+                alerta.style.display = 'block';
+                return;
+            }
+
+            if (usuario === USUARIO_ADMIN_CORRECTO && password === PASSWORD_ADMIN_CORRECTA) {
+                alerta.textContent = "¡Acceso exitoso! Cargando panel...";
+                alerta.classList.add('success');
+                alerta.style.display = 'block';
+
+                setTimeout(() => {
+                    document.getElementById('formLoginDiv').style.display = 'none';
+                    document.getElementById('panelAdminDiv').style.display = 'block';
+                    alerta.style.display = 'none';
+                    renderizarTablaAdmin();
+                }, 800);
+            } else {
+                alerta.textContent = "Usuario o contraseña incorrectos.";
+                alerta.classList.add('error');
+                alerta.style.display = 'block';
+            }
+        }
+
+        function cerrarSesion() {
+            document.getElementById('usuarioInput').value = '';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('panelAdminDiv').style.display = 'none';
+            document.getElementById('formLoginDiv').style.display = 'block';
+        }
+
+        function renderizarTablaAdmin() {
+            const tbody = document.getElementById('cuerpoTablaAdmin');
+            tbody.innerHTML = '';
+
+            productos.forEach((prod, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${prod.nombre}</strong></td>
+                    <td>${obtenerTextoCategoria(prod.categoria)}</td>
+                    <td>${prod.presentacion}</td>
+                    <td>
+                        $<input type="number" value="${prod.precio}" min="1" onchange="actualizarPrecioAdmin(${prod.id}, this.value)">
+                    </td>
+                    <td>
+                        <button class="btn-accion-admin btn-eliminar" onclick="eliminarProductoAdmin(${prod.id})">Eliminar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function agregarNuevoProductoAdmin() {
+            const nombre = document.getElementById('nuevoNombre').value.trim();
+            const categoria = document.getElementById('nuevaCategoria').value;
+            const precio = parseFloat(document.getElementById('nuevoPrecio').value);
+            const presentacion = document.getElementById('nuevaPresentacion').value.trim();
+            const imagen = document.getElementById('nuevaImagen').value.trim() || 'logo.jpg';
+            const descripcion = document.getElementById('nuevaDescripcion').value.trim();
+
+            if (!nombre || !precio || !presentacion) {
+                alert("Por favor complete al menos el Nombre, Precio y Presentación del producto.");
+                return;
+            }
+
+            const nuevoProd = {
+                id: Date.now(),
+                nombre: nombre,
+                categoria: categoria,
+                palabrasClave: (nombre + " " + presentacion).toLowerCase(),
+                precio: precio,
+                presentacion: presentacion,
+                descripcion: descripcion || "Producto natural de alta calidad disponible en tienda.",
+                imagen: imagen
+            };
+
+            productos.unshift(nuevoProd);
+
+            document.getElementById('nuevoNombre').value = '';
+            document.getElementById('nuevoPrecio').value = '';
+            document.getElementById('nuevaPresentacion').value = '';
+            document.getElementById('nuevaImagen').value = '';
+            document.getElementById('nuevaDescripcion').value = '';
+
+            renderizarTablaAdmin();
+            renderizarGrillaCatálogos();
+            alert(`El producto "${nombre}" ha sido añadido correctamente al catálogo.`);
+        }
+
+        function actualizarPrecioAdmin(id, nuevoPrecio) {
+            const prod = productos.find(p => p.id === id);
+            if (prod) {
+                prod.precio = parseFloat(nuevoPrecio) || 0;
+                renderizarGrillaCatálogos();
+            }
+        }
+
+        function eliminarProductoAdmin(id) {
+            if (confirm("¿Está seguro de que desea eliminar este producto del catálogo?")) {
+                productos = productos.filter(p => p.id !== id);
+                renderizarTablaAdmin();
+                renderizarGrillaCatálogos();
+            }
+        }
+
+        function agregarAlCarrito(nombre, precio, imagen) {
+            const index = carrito.findIndex(item => item.nombre === nombre);
+            if (index !== -1) {
+                carrito[index].cantidad += 1;
+            } else {
+                carrito.push({
+                    nombre: nombre,
+                    precio: precio,
+                    imagen: imagen,
+                    cantidad: 1,
+                    seleccionado: true
+                });
+            }
+            actualizarContadorCarrito();
+            alert(`¡"${nombre}" fue añadido al carrito!`);
+        }
+
+        function actualizarContadorCarrito() {
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            document.getElementById('contadorCarrito').textContent = totalItems;
+        }
+
+        function renderizarCarrito() {
+            const contenedor = document.getElementById('listaCarritoItems');
+            contenedor.innerHTML = '';
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = '<p style="text-align: center; color: #64748b; padding: 40px;">Tu carrito está vacío. ¡Explora el catálogo y añade tus productos!</p>';
+                document.getElementById('montoTotalCarrito').textContent = '$0.00';
+                document.getElementById('cantSeleccionada').textContent = '0';
+                return;
+            }
+
+            carrito.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'carrito-item';
+                itemDiv.innerHTML = `
+                    <input type="checkbox" class="checkbox-shein" ${item.seleccionado ? 'checked' : ''} onchange="toggleSeleccionItem(${index})">
+                    <img src="${item.imagen}" alt="${item.nombre}" class="carrito-item-img" onerror="this.src='logo.jpg'">
+                    <div class="carrito-item-detalles">
+                        <h4>${item.nombre}</h4>
+                        <p>$${item.precio} USD</p>
+                        <div class="controles-cantidad">
+                            <button class="btn-qty" onclick="cambiarCantidad(${index}, -1)">-</button>
+                            <span>${item.cantidad}</span>
+                            <button class="btn-qty" onclick="cambiarCantidad(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="btn-eliminar-item" onclick="eliminarDelCarrito(${index})" title="Eliminar ítem">🗑️</button>
+                `;
+                contenedor.appendChild(itemDiv);
+            });
+
+            calcularTotalCarrito();
+        }
+
+        function toggleSeleccionItem(index) {
+            carrito[index].seleccionado = !carrito[index].seleccionado;
+            calcularTotalCarrito();
+        }
+
+        function seleccionarTodos(estado) {
+            carrito.forEach(item => item.seleccionado = estado);
+            renderizarCarrito();
+        }
+
+        function cambiarCantidad(index, cambio) {
+            carrito[index].cantidad += cambio;
+            if (carrito[index].cantidad <= 0) {
+                carrito.splice(index, 1);
+            }
+            actualizarContadorCarrito();
+            renderizarCarrito();
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarContadorCarrito();
+            renderizarCarrito();
+        }
+
+        function calcularTotalCarrito() {
+            let total = 0;
+            let seleccionados = 0;
+
+            carrito.forEach(item => {
+                if (item.seleccionado) {
+                    total += item.precio * item.cantidad;
+                    seleccionados += item.cantidad;
+                }
+            });
+
+            document.getElementById('montoTotalCarrito').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('cantSeleccionada').textContent = seleccionados;
+        }
+
+        function enviarPedidoWhatsApp() {
+            const seleccionados = carrito.filter(item => item.seleccionado);
+
+            if (seleccionados.length === 0) {
+                alert("Por favor, selecciona al menos un producto de tu carrito para enviar la orden.");
+                return;
+            }
+
+            const numeroTelefono = "584124206454";
+            let nombreCliente = prompt("Por favor, ingresa tu nombre para procesar tu pedido:");
+            let saludo = "Hola, vengo de su Catálogo Digital.";
+
+            if (nombreCliente && nombreCliente.trim() !== "") {
+                saludo = `Hola, mi nombre es *${nombreCliente.trim()}*. Vengo de su Catálogo Digital y...`;
+            }
+
+            let detallePedido = "";
+            let totalFinal = 0;
+
+            seleccionados.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                totalFinal += subtotal;
+                detallePedido += `▪️ *${item.nombre}* x${item.cantidad} = $${subtotal}\n`;
+            });
+
+            let mensaje = `${saludo}\n\n🛒 *Me gustaría pedir los siguientes productos seleccionados de mi carrito:*\n\n${detallePedido}\n💰 *Monto Total:* $${totalFinal.toFixed(2)} USD`;
+            window.open(`https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
 
         function filtrarCategoria(categoria, botonSeleccionado) {
             categoriaActual = categoria;
